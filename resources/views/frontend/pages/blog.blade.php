@@ -17,9 +17,9 @@
                     <div class="col-md-12">
                         <div class="item">
                             <div class="post-img br-5px">
-                                <a href="post.html"> <img src="{{ asset('assets/frontend/images/slider/03.jpg') }}" alt="" loading="lazy"> </a>
+                                <a href="{{ route('blog-detail') }}"> <img src="{{ asset('assets/frontend/images/slider/03.jpg') }}" alt="" loading="lazy"> </a>
                                 <div class="date">
-                                    <a href="post.html"> <span>Dec</span> <i>14</i> </a>
+                                    <a href="{{ route('blog-detail') }}"> <span>Dec</span> <i>14</i> </a>
                                 </div>
                             </div>
                             <div class="post-cont">
@@ -30,7 +30,7 @@
                                     <div class="blog-post-categorydate-divider"></div>
                                     <div>Wedding</div>
                                 </div>
-                                <h4><a href="post.html">Love in Every Frame</a></h4>
+                                <h4><a href="{{ route('blog-detail') }}">Love in Every Frame</a></h4>
                                 <p>Photography potenti fringilla pretium ipsum non blandit. Vivamus eget nisi non mi
                                     iaculis iaculis imserie quiseros sevin elentesque habitant morbi tristique senectus
                                     et netus et malesuada fames actur fermen.</p>
@@ -40,9 +40,9 @@
                     <div class="col-md-12">
                         <div class="item">
                             <div class="post-img br-5px">
-                                <a href="post.html"> <img src="{{ asset('assets/frontend/images/slider/08.jpg') }}" alt="" loading="lazy"> </a>
+                                <a href="{{ route('blog-detail') }}"> <img src="{{ asset('assets/frontend/images/slider/08.jpg') }}" alt="" loading="lazy"> </a>
                                 <div class="date">
-                                    <a href="post.html"> <span>Dec</span> <i>18</i> </a>
+                                    <a href="{{ route('blog-detail') }}"> <span>Dec</span> <i>18</i> </a>
                                 </div>
                             </div>
                             <div class="post-cont">
@@ -53,7 +53,7 @@
                                     <div class="blog-post-categorydate-divider"></div>
                                     <div>Fashion</div>
                                 </div>
-                                <h4><a href="post.html">The Art of Style</a></h4>
+                                <h4><a href="{{ route('blog-detail') }}">The Art of Style</a></h4>
                                 <p>Photography potenti fringilla pretium ipsum non blandit. Vivamus eget nisi non mi
                                     iaculis iaculis imserie quiseros sevin elentesque habitant morbi tristique senectus
                                     et netus et malesuada fames actur fermen.</p>
@@ -63,9 +63,9 @@
                     <div class="col-md-12">
                         <div class="item">
                             <div class="post-img br-5px">
-                                <a href="post.html"> <img src="{{ asset('assets/frontend/images/slider/02.jpg') }}" alt="" loading="lazy"> </a>
+                                <a href="{{ route('blog-detail') }}"> <img src="{{ asset('assets/frontend/images/slider/02.jpg') }}" alt="" loading="lazy"> </a>
                                 <div class="date">
-                                    <a href="post.html"> <span>Dec</span> <i>18</i> </a>
+                                    <a href="{{ route('blog-detail') }}"> <span>Dec</span> <i>18</i> </a>
                                 </div>
                             </div>
                             <div class="post-cont">
@@ -76,7 +76,7 @@
                                     <div class="blog-post-categorydate-divider"></div>
                                     <div>Art</div>
                                 </div>
-                                <h4><a href="post.html">Through the Creative Lens</a></h4>
+                                <h4><a href="{{ route('blog-detail') }}">Through the Creative Lens</a></h4>
                                 <p>Photography potenti fringilla pretium ipsum non blandit. Vivamus eget nisi non mi
                                     iaculis iaculis imserie quiseros sevin elentesque habitant morbi tristique senectus
                                     et netus et malesuada fames actur fermen.</p>
@@ -86,9 +86,9 @@
                     <div class="col-md-12">
                         <div class="item">
                             <div class="post-img br-5px">
-                                <a href="post.html"> <img src="{{ asset('assets/frontend/images/slider/01.jpg') }}" alt="" loading="lazy"> </a>
+                                <a href="{{ route('blog-detail') }}"> <img src="{{ asset('assets/frontend/images/slider/01.jpg') }}" alt="" loading="lazy"> </a>
                                 <div class="date">
-                                    <a href="post.html"> <span>Dec</span> <i>18</i> </a>
+                                    <a href="{{ route('blog-detail') }}"> <span>Dec</span> <i>18</i> </a>
                                 </div>
                             </div>
                             <div class="post-cont">
@@ -99,7 +99,7 @@
                                     <div class="blog-post-categorydate-divider"></div>
                                     <div>Travel</div>
                                 </div>
-                                <h4><a href="post.html">Wandering with a Camera</a></h4>
+                                <h4><a href="{{ route('blog-detail') }}">Wandering with a Camera</a></h4>
                                 <p>Photography potenti fringilla pretium ipsum non blandit. Vivamus eget nisi non mi
                                     iaculis iaculis imserie quiseros sevin elentesque habitant morbi tristique senectus
                                     et netus et malesuada fames actur fermen.</p>
@@ -137,15 +137,15 @@
                             <ul class="recent">
                                 <li>
                                     <div class="thum br-5px"> <img src="{{ asset('assets/frontend/images/slider/08.jpg') }}" alt="" loading="lazy">
-                                    </div> <a href="post.html"> The Art of Style</a>
+                                    </div> <a href="{{ route('blog-detail') }}"> The Art of Style</a>
                                 </li>
                                 <li>
                                     <div class="thum br-5px"> <img src="{{ asset('assets/frontend/images/slider/02.jpg') }}" alt="" loading="lazy">
-                                    </div> <a href="post.html">Through the Creative Lens</a>
+                                    </div> <a href="{{ route('blog-detail') }}">Through the Creative Lens</a>
                                 </li>
                                 <li>
                                     <div class="thum br-5px"> <img src="{{ asset('assets/frontend/images/slider/01.jpg') }}" alt="" loading="lazy">
-                                    </div> <a href="post.html">Wandering with a Camera</a>
+                                    </div> <a href="{{ route('blog-detail') }}">Wandering with a Camera</a>
                                 </li>
                             </ul>
                         </div>
@@ -156,9 +156,9 @@
                                 <h5>Archives</h5>
                             </div>
                             <ul>
-                                <li><a href="post.html">December 2026</a></li>
-                                <li><a href="post.html">November 2026</a></li>
-                                <li><a href="post.html">October 2026</a></li>
+                                <li><a href="{{ route('blog-detail') }}">December 2026</a></li>
+                                <li><a href="{{ route('blog-detail') }}">November 2026</a></li>
+                                <li><a href="{{ route('blog-detail') }}">October 2026</a></li>
                             </ul>
                         </div>
                     </div>
@@ -180,12 +180,12 @@
                                 <h5>Tags</h5>
                             </div>
                             <ul class="tags">
-                                <li><a href="post.html">Nature</a></li>
-                                <li><a href="post.html">Portraits</a></li>
-                                <li><a href="post.html">Wedding</a></li>
-                                <li><a href="post.html">Art</a></li>
-                                <li><a href="post.html">Photography</a></li>
-                                <li><a href="post.html">Fashion</a></li>
+                                <li><a href="{{ route('blog-detail') }}">Nature</a></li>
+                                <li><a href="{{ route('blog-detail') }}">Portraits</a></li>
+                                <li><a href="{{ route('blog-detail') }}">Wedding</a></li>
+                                <li><a href="{{ route('blog-detail') }}">Art</a></li>
+                                <li><a href="{{ route('blog-detail') }}">Photography</a></li>
+                                <li><a href="{{ route('blog-detail') }}">Fashion</a></li>
                             </ul>
                         </div>
                     </div>

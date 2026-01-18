@@ -37,29 +37,61 @@ class HomeController extends Controller
         return view('frontend.pages.home');
     }
 
+    public function about()
+    {
+        return view('frontend.pages.about');
+    }
+
+    public function services()
+    {
+        return view('frontend.pages.services');
+    }
+
+    public function portfolio()
+    {
+        return view('frontend.pages.portfolio');
+    }
+
+    public function blog()
+    {
+        return view('frontend.pages.blog');
+    }
+
+    public function contact()
+    {
+        return view('frontend.pages.contact');
+    }
+
+    public function pricing()
+    {
+        return view('frontend.pages.price');
+    }
+
+    public function team()
+    {
+        return view('frontend.pages.team');
+    }
+
+    public function faq()
+    {
+        return view('frontend.pages.faq');
+    }
+
+    public function testimonials()
+    {
+        return view('frontend.pages.testimonials');
+    }
+
+    public function blogDetail()
+    {
+        return view('frontend.pages.blog-detail');
+    }
+
     public function admin()
     {
         if (auth()->check()) {
-            return view('index'); // Dashboard view
+            return view('index');
         }
         return redirect()->route('login');
-    }
-
-    /*Language Translation*/
-    public function lang($locale)
-    {
-        if ($locale) {
-            App::setLocale($locale);
-            Session::put('lang', $locale);
-            Session::save();
-            return redirect()->back()->with('locale', $locale);
-        } else {
-            return redirect()->back();
-        }
-    }
-
-    public function FormSubmit(Request $request)
-    {
-        return view('form-repeater');
     }
 }

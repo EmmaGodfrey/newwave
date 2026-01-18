@@ -19,15 +19,16 @@ Auth::routes();
 
 // Frontend Routes (Public)
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('home');
-Route::get('/about', function () { return view('frontend.pages.about'); })->name('about');
-Route::get('/services', function () { return view('frontend.pages.services'); })->name('services');
-Route::get('/portfolio', function () { return view('frontend.pages.portfolio'); })->name('portfolio');
-Route::get('/blog', function () { return view('frontend.pages.blog'); })->name('blog');
-Route::get('/contact', function () { return view('frontend.pages.contact'); })->name('contact');
-Route::get('/pricing', function () { return view('frontend.pages.price'); })->name('pricing');
-Route::get('/team', function () { return view('frontend.pages.team'); })->name('team');
-Route::get('/faq', function () { return view('frontend.pages.faq'); })->name('faq');
-Route::get('/testimonials', function () { return view('frontend.pages.testimonials'); })->name('testimonials');
+Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
+Route::get('/services', [App\Http\Controllers\HomeController::class, 'services'])->name('services');
+Route::get('/portfolio', [App\Http\Controllers\HomeController::class, 'portfolio'])->name('portfolio');
+Route::get('/blog', [App\Http\Controllers\HomeController::class, 'blog'])->name('blog');
+Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
+Route::get('/pricing', [App\Http\Controllers\HomeController::class, 'pricing'])->name('pricing');
+Route::get('/team', [App\Http\Controllers\HomeController::class, 'team'])->name('team');
+Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faq'])->name('faq');
+Route::get('/testimonials', [App\Http\Controllers\HomeController::class, 'testimonials'])->name('testimonials');
+Route::get('/blog-detail', [App\Http\Controllers\HomeController::class, 'blogDetail'])->name('blog-detail');
 
 // Admin Routes
 Route::prefix('admin')->group(function () {
@@ -35,12 +36,18 @@ Route::prefix('admin')->group(function () {
     
     // Protected admin routes
     Route::middleware('auth')->group(function () {
+        // Users Management
+        Route::resource('users', App\Http\Controllers\UserController::class)->names([
+            'index' => 'admin.users.index',
+            'create' => 'admin.users.create',
+            'store' => 'admin.users.store',
+            'show' => 'admin.users.show',
+            'edit' => 'admin.users.edit',
+            'update' => 'admin.users.update',
+            'destroy' => 'admin.users.destroy',
+        ]);
+        
         Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index']);
     });
 });
 
-// Language Translation
-Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);
-
-// Form submission
-Route::post('/formsubmit', [App\Http\Controllers\HomeController::class, 'FormSubmit'])->name('FormSubmit');

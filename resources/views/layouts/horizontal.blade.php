@@ -300,75 +300,38 @@
                     <ul class="navbar-nav">
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('index')}}">
-                                <i class="uil-home-alt me-2"></i> @lang('translation.Dashboard')
+                            <a class="nav-link" href="{{ route('admin.dashboard') }}">
+                                <i class="uil-home-alt me-2"></i> Dashboard
                             </a>
                         </li>
-    
+
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-more" role="button">
-                                <i class="uil-copy me-2"></i>@lang('translation.Extra_pages') <div class="arrow-down"></div>
+                            <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-content" role="button">
+                                <i class="uil-edit-alt me-2"></i> Content <div class="arrow-down"></div>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="topnav-more">
-                                
-                                <div class="dropdown">
-                                    <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-auth"
-                                        role="button">
-                                        @lang('translation.Authentication') <div class="arrow-down"></div>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="topnav-auth">
-                                        <a href="auth-login" class="dropdown-item">@lang('translation.Login')</a>
-                                        <a href="auth-register" class="dropdown-item">@lang('translation.Register')</a>
-                                        <a href="auth-recoverpw" class="dropdown-item">@lang('translation.Recover_Password')</a>
-                                        <a href="auth-lock-screen" class="dropdown-item">@lang('translation.Lock_Screen')</a>
-                                    </div>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-utility"
-                                        role="button">
-                                        @lang('translation.Utility') <div class="arrow-down"></div>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="topnav-utility">
-                                        <a href="pages-starter" class="dropdown-item">@lang('translation.Starter_Page')</a>
-                                        <a href="pages-maintenance" class="dropdown-item">@lang('translation.Maintenance')</a>
-                                        <a href="pages-comingsoon" class="dropdown-item">@lang('translation.Coming_Soon')</a>
-                                        <a href="pages-404" class="dropdown-item">@lang('translation.Error_404')</a>
-                                        <a href="pages-500" class="dropdown-item">@lang('translation.Error_500')</a>
-                                    </div>
-                                </div>
+                            <div class="dropdown-menu" aria-labelledby="topnav-content">
+                                <a href="#" class="dropdown-item"><i class="uil-postcard me-2"></i>Blog Posts</a>
+                                <a href="#" class="dropdown-item"><i class="uil-image me-2"></i>Portfolio</a>
+                                <a href="#" class="dropdown-item"><i class="uil-cog me-2"></i>Services</a>
+                                <a href="#" class="dropdown-item"><i class="uil-chat-bubble-user me-2"></i>Testimonials</a>
+                                <a href="#" class="dropdown-item"><i class="uil-question-circle me-2"></i>FAQ</a>
                             </div>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-layout" role="button">
-                                <i class="uil-window-section me-2"></i>@lang('translation.Layouts') <div class="arrow-down"></div>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.users.index') }}">
+                                <i class="uil-users-alt me-2"></i> Users
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="topnav-layout">
-                                <div class="dropdown">
-                                    <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-layout-verti"
-                                        role="button">
-                                        @lang('translation.Vertical') <div class="arrow-down"></div>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="topnav-layout-verti">
-                                        <a href="layouts-dark-sidebar" class="dropdown-item">@lang('translation.Dark_Sidebar')</a>
-                                        <a href="layouts-compact-sidebar" class="dropdown-item">@lang('translation.Compact_Sidebar')</a>
-                                        <a href="layouts-icon-sidebar" class="dropdown-item">@lang('translation.Icon_Sidebar')</a>
-                                        <a href="layouts-boxed" class="dropdown-item">@lang('translation.Boxed_Width')</a>
-                                        <a href="layouts-preloader" class="dropdown-item">@lang('translation.Preloader')</a>
-                                        <a href="layouts-colored-sidebar" class="dropdown-item">@lang('translation.Colored_Sidebar')</a>
-                                    </div>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-layout-hori"
-                                        role="button">
-                                        @lang('translation.Horizontal') <div class="arrow-down"></div>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="topnav-layout-hori">
-                                        <a href="layouts-horizontal" class="dropdown-item">@lang('translation.Horizontal')</a>
-                                        <a href="layouts-hori-topbar-dark" class="dropdown-item">@lang('translation.Dark_Topbar')</a>
-                                        <a href="layouts-hori-boxed-width" class="dropdown-item">@lang('translation.Boxed_Width')</a>
-                                        <a href="layouts-hori-preloader" class="dropdown-item">@lang('translation.Preloader')</a>
-                                    </div>
-                                </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-settings" role="button">
+                                <i class="uil-setting me-2"></i> Settings <div class="arrow-down"></div>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="topnav-settings">
+                                <a href="#" class="dropdown-item"><i class="uil-users-alt me-2"></i>Team Members</a>
+                                <a href="#" class="dropdown-item"><i class="uil-dollar-alt me-2"></i>Pricing Plans</a>
+                                <a href="#" class="dropdown-item"><i class="uil-info-circle me-2"></i>Site Information</a>
                             </div>
                         </li>
     
