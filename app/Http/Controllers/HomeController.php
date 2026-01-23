@@ -47,11 +47,6 @@ class HomeController extends Controller
         return view('frontend.pages.services');
     }
 
-    public function portfolio()
-    {
-        return view('frontend.pages.portfolio');
-    }
-
     public function blog()
     {
         return view('frontend.pages.blog');

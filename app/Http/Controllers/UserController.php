@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index(UserDataTable $dataTable)
     {
-        return $dataTable->render('pages.users.index');
+        return $dataTable->render('admin.users.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class UserController extends Controller
     public function create()
     {
         return response()->json([
-            'html' => view('pages.users.modals.create')->render()
+            'html' => view('admin.users.modals.create')->render()
         ]);
     }
 
@@ -64,7 +64,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return response()->json([
-            'html' => view('pages.users.modals.edit', compact('user'))->render()
+            'html' => view('admin.users.modals.edit', compact('user'))->render()
         ]);
     }
 

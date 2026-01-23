@@ -311,10 +311,27 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="topnav-content">
                                 <a href="#" class="dropdown-item"><i class="uil-postcard me-2"></i>Blog Posts</a>
-                                <a href="#" class="dropdown-item"><i class="uil-image me-2"></i>Portfolio</a>
                                 <a href="#" class="dropdown-item"><i class="uil-cog me-2"></i>Services</a>
                                 <a href="#" class="dropdown-item"><i class="uil-chat-bubble-user me-2"></i>Testimonials</a>
                                 <a href="#" class="dropdown-item"><i class="uil-question-circle me-2"></i>FAQ</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-portfolio" role="button">
+                                <i class="uil-image me-2"></i> Portfolio <div class="arrow-down"></div>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="topnav-portfolio">
+                                <a href="{{ route('admin.portfolio.categories.index') }}" class="dropdown-item">
+                                    <i class="uil-folder me-2"></i>Categories
+                                </a>
+                                <a href="{{ route('admin.portfolio.events.index') }}" class="dropdown-item">
+                                    <i class="uil-calendar-alt me-2"></i>Events
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="{{ route('portfolio') }}" target="_blank" class="dropdown-item">
+                                    <i class="uil-external-link-alt me-2"></i>View Portfolio Site
+                                </a>
                             </div>
                         </li>
 

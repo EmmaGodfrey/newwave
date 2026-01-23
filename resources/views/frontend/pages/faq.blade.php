@@ -42,7 +42,7 @@
         <div class="container">
             <!-- Logo -->
             <div class="logo-wrapper">
-                <a class="logo" href="index.html"><img src="images/logo-light.png" class="logo-img" alt=""></a>
+                <a class="logo" href="index.html"><img src="images/newwave-logo.png" class="logo-img" alt="NewWave"></a>
                 <!-- <div class="logo"><h2>Gl<span>oo</span>m</h2></div> -->
             </div>
             <!-- Button -->
@@ -210,7 +210,7 @@
     <footer class="footer-section">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-3 col-md-12"><a href="index.html"><img src="images/logo-light.png" alt=""></a></div>
+                <div class="col-lg-3 col-md-12"><a href="index.html"><img src="images/newwave-logo.png" alt="NewWave"></a></div>
                 <div class="col-lg-3 col-md-12">
                     <h5>Get in touch</h5>
                     <p>hello@gloom.com

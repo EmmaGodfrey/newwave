@@ -3,7 +3,7 @@
     <div class="container">
         <!-- Logo -->
         <div class="logo-wrapper">
-            <a class="logo" href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/logo-light.png') }}" class="logo-img" alt=""></a>
+            <a class="logo" href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/newwave-logo.png') }}" class="logo-img" alt="NewWave"></a>
             <!-- <div class="logo"><h2>Gl<span>oo</span>m</h2></div> -->
         </div>
         <!-- Button -->

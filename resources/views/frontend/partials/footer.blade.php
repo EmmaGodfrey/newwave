@@ -1,7 +1,7 @@
 <footer class="footer-section">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-3 col-md-12"><a href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/logo-light.png') }}" alt=""></a></div>
+            <div class="col-lg-3 col-md-12"><a href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/newwave-logo.png') }}" alt="NewWave"></a></div>
             <div class="col-lg-3 col-md-12">
                 <h5>Get in touch</h5>
                 <p>hello@gloom.com
