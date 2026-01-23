@@ -26,7 +26,7 @@ Route::get('/portfolio/category/{slug}', [App\Http\Controllers\PortfolioControll
 Route::get('/portfolio/event/{slug}', [App\Http\Controllers\PortfolioController::class, 'show'])->name('portfolio.event');
 Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog');
 Route::get('/blog/search', [App\Http\Controllers\BlogController::class, 'search'])->name('blog.search');
-Route::get('/blog/category/{category}', [App\Http\Controllers\BlogController::class, 'category'])->name('blog.category');
+Route::get('/blog/category/{categorySlug}', [App\Http\Controllers\BlogController::class, 'category'])->name('blog.category');
 Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 Route::get('/pricing', [App\Http\Controllers\HomeController::class, 'pricing'])->name('pricing');
@@ -85,6 +85,16 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     });
     
     // Blog Management
+    Route::resource('blog-categories', App\Http\Controllers\Admin\BlogCategoryController::class)->names([
+        'index' => 'admin.blog-categories.index',
+        'create' => 'admin.blog-categories.create',
+        'store' => 'admin.blog-categories.store',
+        'show' => 'admin.blog-categories.show',
+        'edit' => 'admin.blog-categories.edit',
+        'update' => 'admin.blog-categories.update',
+        'destroy' => 'admin.blog-categories.destroy',
+    ]);
+    
     Route::resource('blogs', App\Http\Controllers\Admin\BlogController::class)->names([
         'index' => 'admin.blogs.index',
         'create' => 'admin.blogs.create',

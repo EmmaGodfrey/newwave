@@ -39,7 +39,7 @@
                                         </a>
                                         <div class="blog-post-categorydate-divider"></div>
                                         @if($blog->category)
-                                            <div><a href="{{ route('blog.category', $blog->category) }}">{{ $blog->category }}</a></div>
+                                            <div><a href="{{ route('blog.category', $blog->category->slug) }}">{{ $blog->category->name }}</a></div>
                                         @else
                                             <div>Uncategorized</div>
                                         @endif
@@ -144,7 +144,7 @@
                                 </div>
                                 <ul>
                                     @foreach($categories as $cat)
-                                        <li><a href="{{ route('blog.category', $cat) }}"><i class="ti-angle-right"></i>{{ $cat }}</a></li>
+                                        <li><a href="{{ route('blog.category', $cat->slug) }}"><i class="ti-angle-right"></i>{{ $cat->name }}</a></li>
                                     @endforeach
                                 </ul>
                             </div>

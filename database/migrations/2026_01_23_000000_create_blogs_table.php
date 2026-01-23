@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('excerpt')->nullable();
             $table->longText('content');
             $table->string('image')->nullable();
-            $table->string('category')->nullable();
+            $table->foreignId('blog_category_id')->nullable()->constrained('blog_categories')->onDelete('set null');
             $table->string('author')->nullable();
             $table->enum('status', ['draft', 'published'])->default('draft');
             $table->timestamp('published_at')->nullable();

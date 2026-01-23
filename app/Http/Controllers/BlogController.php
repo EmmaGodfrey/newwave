@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -12,23 +13,24 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::published()
+        $blogs = Blog::with('category')
+            ->published()
             ->orderBy('published_at', 'desc')
             ->paginate(10);
 
         // Get recent posts for sidebar
-        $recentPosts = Blog::published()
+        $recentPosts = Blog::with('category')
+            ->published()
             ->orderBy('published_at', 'desc')
             ->take(3)
             ->get();
 
-        // Get unique categories for sidebar
-        $categories = Blog::published()
-            ->whereNotNull('category')
-            ->select('category')
-            ->groupBy('category')
-            ->get()
-            ->pluck('category');
+        // Get active categories for sidebar
+        $categories = BlogCategory::active()
+            ->whereHas('activeBlogs')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get();
 
         // Get archives (months with published posts)
         $archives = Blog::published()
@@ -46,7 +48,8 @@ class BlogController extends Controller
      */
     public function show($slug)
     {
-        $blog = Blog::where('slug', $slug)
+        $blog = Blog::with('category')
+            ->where('slug', $slug)
             ->published()
             ->firstOrFail();
 
@@ -62,7 +65,8 @@ class BlogController extends Controller
             ->first();
 
         // Get recent posts for sidebar
-        $recentPosts = Blog::published()
+        $recentPosts = Blog::with('category')
+            ->published()
             ->where('id', '!=', $blog->id)
             ->orderBy('published_at', 'desc')
             ->take(3)
@@ -74,26 +78,31 @@ class BlogController extends Controller
     /**
      * Display blogs by category.
      */
-    public function category($category)
+    public function category($categorySlug)
     {
-        $blogs = Blog::published()
-            ->where('category', $category)
+        $selectedCategory = BlogCategory::where('slug', $categorySlug)
+            ->active()
+            ->firstOrFail();
+
+        $blogs = Blog::with('category')
+            ->published()
+            ->where('blog_category_id', $selectedCategory->id)
             ->orderBy('published_at', 'desc')
             ->paginate(10);
 
         // Get recent posts for sidebar
-        $recentPosts = Blog::published()
+        $recentPosts = Blog::with('category')
+            ->published()
             ->orderBy('published_at', 'desc')
             ->take(3)
             ->get();
 
-        // Get unique categories for sidebar
-        $categories = Blog::published()
-            ->whereNotNull('category')
-            ->select('category')
-            ->groupBy('category')
-            ->get()
-            ->pluck('category');
+        // Get active categories for sidebar
+        $categories = BlogCategory::active()
+            ->whereHas('activeBlogs')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get();
 
         // Get archives
         $archives = Blog::published()
@@ -103,7 +112,7 @@ class BlogController extends Controller
             ->take(6)
             ->get();
 
-        return view('frontend.pages.blog', compact('blogs', 'recentPosts', 'categories', 'archives', 'category'));
+        return view('frontend.pages.blog', compact('blogs', 'recentPosts', 'categories', 'archives', 'selectedCategory'));
     }
 
     /**
@@ -113,7 +122,8 @@ class BlogController extends Controller
     {
         $searchTerm = $request->input('search');
 
-        $blogs = Blog::published()
+        $blogs = Blog::with('category')
+            ->published()
             ->where(function($query) use ($searchTerm) {
                 $query->where('title', 'like', '%' . $searchTerm . '%')
                     ->orWhere('content', 'like', '%' . $searchTerm . '%')
@@ -123,18 +133,18 @@ class BlogController extends Controller
             ->paginate(10);
 
         // Get recent posts for sidebar
-        $recentPosts = Blog::published()
+        $recentPosts = Blog::with('category')
+            ->published()
             ->orderBy('published_at', 'desc')
             ->take(3)
             ->get();
 
-        // Get unique categories for sidebar
-        $categories = Blog::published()
-            ->whereNotNull('category')
-            ->select('category')
-            ->groupBy('category')
-            ->get()
-            ->pluck('category');
+        // Get active categories for sidebar
+        $categories = BlogCategory::active()
+            ->whereHas('activeBlogs')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get();
 
         // Get archives
         $archives = Blog::published()

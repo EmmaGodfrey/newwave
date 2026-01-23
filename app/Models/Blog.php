@@ -16,7 +16,7 @@ class Blog extends Model
         'excerpt',
         'content',
         'image',
-        'category',
+        'blog_category_id',
         'author',
         'status',
         'published_at',
@@ -62,5 +62,13 @@ class Blog extends Model
     public function scopeDraft($query)
     {
         return $query->where('status', 'draft');
+    }
+
+    /**
+     * Get the category for the blog.
+     */
+    public function category()
+    {
+        return $this->belongsTo(BlogCategory::class, 'blog_category_id');
     }
 }

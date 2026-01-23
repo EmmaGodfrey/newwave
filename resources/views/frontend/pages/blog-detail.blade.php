@@ -9,7 +9,7 @@
                 <div class="col-md-12">
                     <div class="blog-post-categorydate-wrapper">
                         <a href="{{ route('blog') }}">
-                            <div>Blog{{ $blog->category ? ' / ' . $blog->category : '' }}</div>
+                            <div>Blog{{ $blog->category ? ' / ' . $blog->category->name : '' }}</div>
                         </a>
                         <div class="blog-post-categorydate-divider"></div>
                         <div>{{ $blog->published_at->format('d M, Y') }}</div>
