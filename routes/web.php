@@ -24,13 +24,15 @@ Route::get('/services', [App\Http\Controllers\HomeController::class, 'services']
 Route::get('/portfolio', [App\Http\Controllers\PortfolioController::class, 'index'])->name('portfolio');
 Route::get('/portfolio/category/{slug}', [App\Http\Controllers\PortfolioController::class, 'category'])->name('portfolio.category');
 Route::get('/portfolio/event/{slug}', [App\Http\Controllers\PortfolioController::class, 'show'])->name('portfolio.event');
-Route::get('/blog', [App\Http\Controllers\HomeController::class, 'blog'])->name('blog');
+Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog');
+Route::get('/blog/search', [App\Http\Controllers\BlogController::class, 'search'])->name('blog.search');
+Route::get('/blog/category/{category}', [App\Http\Controllers\BlogController::class, 'category'])->name('blog.category');
+Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 Route::get('/pricing', [App\Http\Controllers\HomeController::class, 'pricing'])->name('pricing');
 Route::get('/team', [App\Http\Controllers\HomeController::class, 'team'])->name('team');
 Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faq'])->name('faq');
 Route::get('/testimonials', [App\Http\Controllers\HomeController::class, 'testimonials'])->name('testimonials');
-Route::get('/blog-detail', [App\Http\Controllers\HomeController::class, 'blogDetail'])->name('blog-detail');
 
 // Admin Routes
 Route::prefix('admin')->middleware('auth')->group(function () {
@@ -81,6 +83,17 @@ Route::prefix('admin')->middleware('auth')->group(function () {
                 'destroy' => 'images.destroy',
             ]);
     });
+    
+    // Blog Management
+    Route::resource('blogs', App\Http\Controllers\Admin\BlogController::class)->names([
+        'index' => 'admin.blogs.index',
+        'create' => 'admin.blogs.create',
+        'store' => 'admin.blogs.store',
+        'show' => 'admin.blogs.show',
+        'edit' => 'admin.blogs.edit',
+        'update' => 'admin.blogs.update',
+        'destroy' => 'admin.blogs.destroy',
+    ]);
     
     // Catch-all route for admin
     Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index']);

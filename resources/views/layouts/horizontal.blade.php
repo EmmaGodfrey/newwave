@@ -310,10 +310,14 @@
                                 <i class="uil-edit-alt me-2"></i> Content <div class="arrow-down"></div>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="topnav-content">
-                                <a href="#" class="dropdown-item"><i class="uil-postcard me-2"></i>Blog Posts</a>
+                                <a href="{{ route('admin.blogs.index') }}" class="dropdown-item"><i class="uil-postcard me-2"></i>Blog Posts</a>
                                 <a href="#" class="dropdown-item"><i class="uil-cog me-2"></i>Services</a>
                                 <a href="#" class="dropdown-item"><i class="uil-chat-bubble-user me-2"></i>Testimonials</a>
                                 <a href="#" class="dropdown-item"><i class="uil-question-circle me-2"></i>FAQ</a>
+                                <div class="dropdown-divider"></div>
+                                <a href="{{ route('blog') }}" target="_blank" class="dropdown-item">
+                                    <i class="uil-external-link-alt me-2"></i>View Blog Site
+                                </a>
                             </div>
                         </li>
 

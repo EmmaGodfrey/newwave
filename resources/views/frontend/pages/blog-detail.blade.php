@@ -8,28 +8,23 @@
             <div class="row mb-45">
                 <div class="col-md-12">
                     <div class="blog-post-categorydate-wrapper">
-                        <a href="blog.html">
-                            <div>Blog / Wedding</div>
+                        <a href="{{ route('blog') }}">
+                            <div>Blog{{ $blog->category ? ' / ' . $blog->category : '' }}</div>
                         </a>
                         <div class="blog-post-categorydate-divider"></div>
-                        <div>14 Apr, 2026</div>
+                        <div>{{ $blog->published_at->format('d M, Y') }}</div>
                     </div>
-                    <h1>Love in Every Frame</h1>
+                    <h1>{{ $blog->title }}</h1>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6"> <img src="images/slider/03.jpg" class="br-5px mb-60 img-fluid" alt="" loading="lazy"></div>
-                <div class="col-md-6">
-                    <div class="video-gallery mb-60">
-                        <div class="item">
-                            <div class="img"> <img src="images/slider/09.jpg" alt=""> </div>
-                            <a class="vid" href="https://youtu.be/z2VnmY5jK_s"> <span class="video-icon"> <i class="fa-solid fa-play"></i></span> </a>
-                        </div>
+                @if($blog->image)
+                    <div class="col-md-12">
+                        <img src="{{ asset('storage/' . $blog->image) }}" class="br-5px mb-60 img-fluid" alt="{{ $blog->title }}" loading="lazy">
                     </div>
-                </div>
+                @endif
             </div>
-            <p>Quisque volutpat non nisl idele tincidunt praesent at eros vitae the pulvinar ornare. Nuncion eleifen the interdum velit, ac accumsan dui fermentum et. In the imperdiet urna sed efficitur euismod. Vestibulum bullam corper purus arcu, vel pretium nibh mattis vestibulum ac diam purus. Quisque volutpat non nisl idele tincidunt praesent at eros vitae the pulvinar ornare. Nuncion eleifen the interdum velit, ac accumsan dui fermentum.</p>
-            <p>Quisque volutpat non nisl idele tincidunt praesent at eros vitae the pulvinar ornare. Nuncion eleifen the interdum velit, ac accumsan dui fermentum et. In the imperdiet urna sed efficitur euismod. Vestibulum bullam corper purus arcu, vel pretium nibh mattis vestibulum ac diam purus.</p>
+            {!! $blog->content !!}
             <div class="blog-comment-section">
                 <div class="row">
                     <!-- Comment -->
@@ -81,29 +76,41 @@
     <section class="nex-prv">
         <div class="container">
             <div class="row">
-                <div class="col-md-5 rest">
-                    <div class="prv">
-                        <div class="img bg-img" data-background="images/slider/01.jpg">
-                            <div class="text-left ontop">
-                                <h5><a href="post.html">The Art of Style</a></h5> <span class="sub-title mb-0 mt-10">Prev Post</span>
+                @if($previousPost)
+                    <div class="col-md-5 rest">
+                        <div class="prv">
+                            <div class="img bg-img" data-background="{{ $previousPost->image ? asset('storage/' . $previousPost->image) : asset('assets/frontend/images/slider/01.jpg') }}">
+                                <div class="text-left ontop">
+                                    <h5><a href="{{ route('blog.show', $previousPost->slug) }}">{{ $previousPost->title }}</a></h5>
+                                    <span class="sub-title mb-0 mt-10">Prev Post</span>
+                                </div>
+                                <div class="overly"></div>
                             </div>
-                            <div class="overly"></div>
                         </div>
                     </div>
-                </div>
+                @else
+                    <div class="col-md-5 rest"></div>
+                @endif
                 <div class="col-md-2 text-center rest">
-                    <a href="blog.html" class="all-works d-flex align-items-center"> <span class="icon full-width ti-layout-grid3"></span> </a>
+                    <a href="{{ route('blog') }}" class="all-works d-flex align-items-center">
+                        <span class="icon full-width ti-layout-grid3"></span>
+                    </a>
                 </div>
-                <div class="col-md-5 rest">
-                    <div class="nxt">
-                        <div class="img bg-img" data-background="images/slider/02.jpg">
-                            <div class="text-right ontop">
-                                <h5><a href="portfolio-page.html">Through the Creative Lens</a></h5> <span class="sub-title mb-0 mt-10">Next Post</span>
+                @if($nextPost)
+                    <div class="col-md-5 rest">
+                        <div class="nxt">
+                            <div class="img bg-img" data-background="{{ $nextPost->image ? asset('storage/' . $nextPost->image) : asset('assets/frontend/images/slider/02.jpg') }}">
+                                <div class="text-right ontop">
+                                    <h5><a href="{{ route('blog.show', $nextPost->slug) }}">{{ $nextPost->title }}</a></h5>
+                                    <span class="sub-title mb-0 mt-10">Next Post</span>
+                                </div>
+                                <div class="overly"></div>
                             </div>
-                            <div class="overly"></div>
                         </div>
                     </div>
-                </div>
+                @else
+                    <div class="col-md-5 rest"></div>
+                @endif
             </div>
         </div>
     </section>
