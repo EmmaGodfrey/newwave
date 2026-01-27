@@ -1,11 +1,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gloom - Photography Portfolio Template</title>
+<title>NewWave Motorsport - Photography & Videography</title>
 <meta name="description"
-    content="Gloom is a modern and elegant photography portfolio theme designed for creatives, photographers, and visual artists.">
-<meta name="keywords" content="photography, portfolio, gallery, fullscreen, creative, responsive, gloom">
-<meta name="author" content="DuruThemes">
+    content="NewWave Motorsport is a premier photography and videography service based in Zambia, specializing in motorsport events and creative visual storytelling.">
+<meta name="keywords" content="photography, videography, motorsport, zambia, portfolio, events, creative">
+<meta name="author" content="NewWave Motorsport">
 <link rel="icon" type="image/x-icon" href="{{ asset('assets/frontend/images/favicon.ico') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>

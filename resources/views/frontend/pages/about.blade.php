@@ -74,72 +74,23 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="owl-carousel owl-theme">
+                    @forelse($teamMembers as $member)
                     <div class="item">
-                        <div class="img"><a href="team-details.html"><img src="{{ asset('assets/frontend/images/team/1.jpg') }}" alt=""
+                        <div class="img"><a href="#"><img src="{{ asset('storage/' . $member->image) }}" alt="{{ $member->name }}"
                                     loading="lazy"></a></div>
                         <div class="bg"></div>
                         <div class="con">
-                            <a href="team-details.html">
-                                <div class="title"><span>Mr Unknown</span></div>
-                                <div class="subtitle"><span>Founder & Lead Creator</span></div>
+                            <a href="#">
+                                <div class="title"><span>{{ $member->name }}</span></div>
+                                <div class="subtitle"><span>{{ $member->position }}</span></div>
                             </a>
                         </div>
                     </div>
+                    @empty
                     <div class="item">
-                        <div class="img"><a href="team-details.html"><img src="{{ asset('assets/frontend/images/team/2.jpg') }}" alt=""
-                                    loading="lazy"></a></div>
-                        <div class="bg"></div>
-                        <div class="con">
-                            <a href="team-details.html">
-                                <div class="title"><span>James</span></div>
-                                <div class="subtitle"><span>Event Photographer</span></div>
-                            </a>
-                        </div>
+                        <p class="text-center">No team members available.</p>
                     </div>
-                    <div class="item">
-                        <div class="img"><a href="team-details.html"><img src="{{ asset('assets/frontend/images/team/3.jpg') }}" alt=""
-                                    loading="lazy"></a></div>
-                        <div class="bg"></div>
-                        <div class="con">
-                            <a href="team-details.html">
-                                <div class="title"><span>Sophia</span></div>
-                                <div class="subtitle"><span>Videographer</span></div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img"><a href="team-details.html"><img src="{{ asset('assets/frontend/images/team/4.jpg') }}" alt=""
-                                    loading="lazy"></a></div>
-                        <div class="bg"></div>
-                        <div class="con">
-                            <a href="team-details.html">
-                                <div class="title"><span>Frank</span></div>
-                                <div class="subtitle"><span>Track Photographer</span></div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img"><a href="team-details.html"><img src="{{ asset('assets/frontend/images/team/5.jpg') }}" alt=""
-                                    loading="lazy"></a></div>
-                        <div class="bg"></div>
-                        <div class="con">
-                            <a href="team-details.html">
-                                <div class="title"><span>Emma</span></div>
-                                <div class="subtitle"><span>Content Strategist</span></div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img"><a href="team-details.html"><img src="{{ asset('assets/frontend/images/team/6.jpg') }}" alt=""
-                                    loading="lazy"></a></div>
-                        <div class="bg"></div>
-                        <div class="con">
-                            <a href="team-details.html">
-                                <div class="title"><span>Emily</span></div>
-                                <div class="subtitle"><span>Drone Specialist</span></div>
-                            </a>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -164,26 +115,24 @@
                     <div class="testimonials-box">
                         <h5>What Are Clients Saying?</h5>
                         <div class="owl-carousel owl-theme">
+                            @forelse($testimonials as $testimonial)
                             <div class="item">
-                                <p>New Wave Motorsport captured the energy and passion of our event perfectly. Their authentic approach to motorsport storytelling made our brand shine in ways we never expected.</p> <span
+                                <p>{{ $testimonial->testimonial }}</p> <span
                                     class="quote"><img src="{{ asset('assets/frontend/images/quot.png') }}" alt="" loading="lazy"></span>
                                 <div class="info">
-                                    <div class="author-img"> <img src="{{ asset('assets/frontend/images/team/1.jpg') }}" alt="" loading="lazy"> </div>
+                                    <div class="author-img">
+                                        <i class="ti-user" style="font-size: 40px; color: #aa8453;"></i>
+                                    </div>
                                     <div class="cont">
-                                        <h6>Marcus Johnson</h6> <span>Event Organizer</span>
+                                        <h6>{{ $testimonial->client_name }}</h6> <span>{{ $testimonial->client_position ?? 'Customer' }}</span>
                                     </div>
                                 </div>
                             </div>
+                            @empty
                             <div class="item">
-                                <p>From grassroots coverage to professional campaigns, New Wave Motorsport delivers content that truly connects with the car community. Their growth speaks for itself.</p> <span
-                                    class="quote"><img src="{{ asset('assets/frontend/images/quot.png') }}" alt="" loading="lazy"></span>
-                                <div class="info">
-                                    <div class="author-img"> <img src="{{ asset('assets/frontend/images/team/2.jpg') }}" alt="" loading="lazy"> </div>
-                                    <div class="cont">
-                                        <h6>Sarah Mitchell</h6> <span>Brand Manager</span>
-                                    </div>
-                                </div>
+                                <p>No testimonials available.</p>
                             </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>

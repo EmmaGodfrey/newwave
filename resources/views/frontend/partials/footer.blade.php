@@ -1,17 +1,17 @@
 <footer class="footer-section">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-3 col-md-12"><a href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/newwave-logo.png') }}" alt="NewWave"></a></div>
+            <div class="col-lg-3 col-md-12"><a href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/newwavelogo.png') }}" alt="NewWave"></a></div>
             <div class="col-lg-3 col-md-12">
                 <h5>Get in touch</h5>
-                <p>hello@gloom.com
-                    <br>+1 234-567-8910
+                <p>info@newwavemotorsport.com
+                    <br>+260 XXX XXX XXX
                 </p>
             </div>
             <div class="col-lg-3 col-md-12">
-                <h5>Locations</h5>
-                <p>San Francisco — California
-                    <br>Palo Alto — Santa Clara
+                <h5>Location</h5>
+                <p>Lusaka — Zambia
+                    <br>
                 </p>
             </div>
             <div class="col-lg-3 col-md-12">
@@ -29,8 +29,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-10 text-center">
-                <p class="mb-0 copyright">© 2026 Gloom is designed by <a href="https://1.envato.market/DuruThemes"
-                        target="_blank">DuruThemes</a>.</p>
+                <p class="mb-0 copyright">© 2026 NewWave Motorsport. All rights reserved.</p>
             </div>
         </div>
     </div>

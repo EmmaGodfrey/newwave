@@ -112,7 +112,7 @@
         } else {
             navbar.removeClass("nav-scroll");
         }
-        logo.attr('src', '/assets/frontend/images/newwave-logo.png');
+        logo.attr('src', '/assets/frontend/images/newwavelogo.png');
     });
     
     /*----------------------------------------------------

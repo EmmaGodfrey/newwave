@@ -42,7 +42,7 @@
         <div class="container">
             <!-- Logo -->
             <div class="logo-wrapper">
-                <a class="logo" href="index.html"><img src="images/newwave-logo.png" class="logo-img" alt="NewWave"></a>
+                <a class="logo" href="index.html"><img src="images/.png" class="logo-img" alt="NewWave"></a>
                 <!-- <div class="logo"><h2>Gl<span>oo</span>m</h2></div> -->
             </div>
             <!-- Button -->
@@ -210,17 +210,17 @@
     <footer class="footer-section">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-3 col-md-12"><a href="index.html"><img src="images/newwave-logo.png" alt="NewWave"></a></div>
+                <div class="col-lg-3 col-md-12"><a href="index.html"><img src="images/newwavelogo.png" alt="NewWave"></a></div>
                 <div class="col-lg-3 col-md-12">
                     <h5>Get in touch</h5>
-                    <p>hello@gloom.com
-                        <br>+1 234-567-8910
+                    <p>info@newwavemotorsport.com
+                        <br>+260 XXX XXX XXX
                     </p>
                 </div>
                 <div class="col-lg-3 col-md-12">
-                    <h5>Locations</h5>
-                    <p>San Francisco — California
-                        <br>Palo Alto — Santa Clara
+                    <h5>Location</h5>
+                    <p>Lusaka — Zambia
+                        <br>
                     </p>
                 </div>
                 <div class="col-lg-3 col-md-12">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -40,7 +41,9 @@ class BlogController extends Controller
             ->take(6)
             ->get();
 
-        return view('frontend.pages.blog', compact('blogs', 'recentPosts', 'categories', 'archives'));
+        $testimonials = Testimonial::active()->ordered()->take(2)->get();
+
+        return view('frontend.pages.blog', compact('blogs', 'recentPosts', 'categories', 'archives', 'testimonials'));
     }
 
     /**

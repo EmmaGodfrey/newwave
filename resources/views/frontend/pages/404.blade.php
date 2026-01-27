@@ -40,7 +40,7 @@
         <div class="container">
             <!-- Logo -->
             <div class="logo-wrapper">
-                <a class="logo" href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/newwave-logo.png') }}" class="logo-img" alt="NewWave"></a>
+                <a class="logo" href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/newwavelogo.png') }}" class="logo-img" alt="NewWave"></a>
                 <!-- <div class="logo"><h2>Gl<span>oo</span>m</h2></div> -->
             </div>
             <!-- Button -->
@@ -170,11 +170,11 @@
     <footer class="footer-section">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-3 col-md-12"><a href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/newwave-logo.png') }}" alt="NewWave"></a></div>
+                <div class="col-lg-3 col-md-12"><a href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/newwavelogo.png') }}" alt="NewWave"></a></div>
                 <div class="col-lg-3 col-md-12">
                     <h5>Get in touch</h5>
-                    <p>hello@gloom.com
-                        <br>+1 234-567-8910
+                    <p>info@newwavemotorsport.com
+                        <br>+260 XXX XXX XXX
                     </p>
                 </div>
                 <div class="col-lg-3 col-md-12">

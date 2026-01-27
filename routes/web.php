@@ -105,6 +105,39 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         'destroy' => 'admin.blogs.destroy',
     ]);
     
+    // Team Members Management
+    Route::resource('team-members', App\Http\Controllers\Admin\TeamMemberController::class)->names([
+        'index' => 'admin.team-members.index',
+        'create' => 'admin.team-members.create',
+        'store' => 'admin.team-members.store',
+        'show' => 'admin.team-members.show',
+        'edit' => 'admin.team-members.edit',
+        'update' => 'admin.team-members.update',
+        'destroy' => 'admin.team-members.destroy',
+    ]);
+    
+    // Testimonials Management
+    Route::resource('testimonials', App\Http\Controllers\Admin\TestimonialController::class)->names([
+        'index' => 'admin.testimonials.index',
+        'create' => 'admin.testimonials.create',
+        'store' => 'admin.testimonials.store',
+        'show' => 'admin.testimonials.show',
+        'edit' => 'admin.testimonials.edit',
+        'update' => 'admin.testimonials.update',
+        'destroy' => 'admin.testimonials.destroy',
+    ]);
+    
+    // Service Pricing Management
+    Route::resource('service-pricing', App\Http\Controllers\Admin\ServicePricingController::class)->names([
+        'index' => 'admin.service-pricing.index',
+        'create' => 'admin.service-pricing.create',
+        'store' => 'admin.service-pricing.store',
+        'show' => 'admin.service-pricing.show',
+        'edit' => 'admin.service-pricing.edit',
+        'update' => 'admin.service-pricing.update',
+        'destroy' => 'admin.service-pricing.destroy',
+    ]);
+    
     // Catch-all route for admin
     Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index']);
 });

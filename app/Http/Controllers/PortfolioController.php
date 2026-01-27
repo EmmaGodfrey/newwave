@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PortfolioCategory;
 use App\Models\PortfolioEvent;
 use App\Models\EventImage;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 class PortfolioController extends Controller
@@ -18,7 +19,9 @@ class PortfolioController extends Controller
             ->orderBy('sort_order')
             ->get();
 
-        return view('frontend.pages.portfolio', compact('categories'));
+        $testimonials = Testimonial::active()->ordered()->take(2)->get();
+
+        return view('frontend.pages.portfolio', compact('categories', 'testimonials'));
     }
 
     public function show($slug)

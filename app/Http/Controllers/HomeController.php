@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TeamMember;
+use App\Models\Testimonial;
+use App\Models\ServicePricing;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 
@@ -34,17 +36,24 @@ class HomeController extends Controller
 
     public function root()
     {
-        return view('frontend.pages.home');
+        $testimonials = Testimonial::active()->ordered()->take(2)->get();
+        $pricing = ServicePricing::active()->ordered()->take(3)->get();
+        $services = ServicePricing::active()->ordered()->get();
+        return view('frontend.pages.home', compact('testimonials', 'pricing', 'services'));
     }
 
     public function about()
     {
-        return view('frontend.pages.about');
+        $teamMembers = TeamMember::active()->ordered()->get();
+        $testimonials = Testimonial::active()->ordered()->take(2)->get();
+        return view('frontend.pages.about', compact('teamMembers', 'testimonials'));
     }
 
     public function services()
     {
-        return view('frontend.pages.services');
+        $services = ServicePricing::active()->ordered()->get();
+        $testimonials = Testimonial::active()->ordered()->take(2)->get();
+        return view('frontend.pages.services', compact('services', 'testimonials'));
     }
 
     public function blog()
@@ -54,17 +63,22 @@ class HomeController extends Controller
 
     public function contact()
     {
-        return view('frontend.pages.contact');
+        $testimonials = Testimonial::active()->ordered()->take(2)->get();
+        return view('frontend.pages.contact', compact('testimonials'));
     }
 
     public function pricing()
     {
-        return view('frontend.pages.price');
+        $pricing = ServicePricing::active()->ordered()->get();
+        $testimonials = Testimonial::active()->ordered()->take(2)->get();
+        return view('frontend.pages.price', compact('pricing', 'testimonials'));
     }
 
     public function team()
     {
-        return view('frontend.pages.team');
+        $teamMembers = TeamMember::active()->ordered()->get();
+        $testimonials = Testimonial::active()->ordered()->take(2)->get();
+        return view('frontend.pages.team', compact('teamMembers', 'testimonials'));
     }
 
     public function faq()
@@ -74,7 +88,8 @@ class HomeController extends Controller
 
     public function testimonials()
     {
-        return view('frontend.pages.testimonials');
+        $testimonials = Testimonial::active()->ordered()->get();
+        return view('frontend.pages.testimonials', compact('testimonials'));
     }
 
     public function blogDetail()

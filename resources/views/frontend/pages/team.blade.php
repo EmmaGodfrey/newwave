@@ -11,84 +11,24 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-12 mb-45">
-                <div class="item">
-                    <div class="img"><a href="team-details.html"><img src="{{ asset('assets/frontend/images/team/1.jpg') }}" alt="" loading="lazy"></a>
-                    </div>
-                    <div class="bg"></div>
-                    <div class="con">
-                        <a href="team-details.html">
-                            <div class="title"><span>Olivia</span></div>
-                            <div class="subtitle"><span>Lead Photographer</span></div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12 mb-45">
-                <div class="item">
-                    <div class="img"><a href="team-details.html"><img src="{{ asset('assets/frontend/images/team/2.jpg') }}" alt="" loading="lazy"></a>
-                    </div>
-                    <div class="bg"></div>
-                    <div class="con">
-                        <a href="team-details.html">
-                            <div class="title"><span>James</span></div>
-                            <div class="subtitle"><span>Fashion Photographer</span></div>
-                        </a>
+            @forelse($teamMembers as $member)
+                <div class="col-lg-4 col-md-12 mb-45">
+                    <div class="item">
+                        <div class="img">
+                            <img src="{{ asset('storage/' . $member->image) }}" alt="{{ $member->name }}" loading="lazy">
+                        </div>
+                        <div class="bg"></div>
+                        <div class="con">
+                            <div class="title"><span>{{ $member->name }}</span></div>
+                            <div class="subtitle"><span>{{ $member->position }}</span></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-12 mb-45">
-                <div class="item">
-                    <div class="img"><a href="team-details.html"><img src="{{ asset('assets/frontend/images/team/3.jpg') }}" alt="" loading="lazy"></a>
-                    </div>
-                    <div class="bg"></div>
-                    <div class="con">
-                        <a href="team-details.html">
-                            <div class="title"><span>Sophia</span></div>
-                            <div class="subtitle"><span>Wedding Photographer</span></div>
-                        </a>
-                    </div>
+            @empty
+                <div class="col-md-12 text-center mt-60 mb-60">
+                    <p class="wow fadeInUp" style="font-size: 18px; color: #777;">No team members available at the moment.</p>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-12 mb-45">
-                <div class="item">
-                    <div class="img"><a href="team-details.html"><img src="{{ asset('assets/frontend/images/team/4.jpg') }}" alt="" loading="lazy"></a>
-                    </div>
-                    <div class="bg"></div>
-                    <div class="con">
-                        <a href="team-details.html">
-                            <div class="title"><span>Frank</span></div>
-                            <div class="subtitle"><span>Portrait Photographer</span></div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12 mb-45">
-                <div class="item">
-                    <div class="img"><a href="team-details.html"><img src="{{ asset('assets/frontend/images/team/5.jpg') }}" alt="" loading="lazy"></a>
-                    </div>
-                    <div class="bg"></div>
-                    <div class="con">
-                        <a href="team-details.html">
-                            <div class="title"><span>Emma</span></div>
-                            <div class="subtitle"><span>Lighting Specialist</span></div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12 mb-45">
-                <div class="item">
-                    <div class="img"><a href="team-details.html"><img src="{{ asset('assets/frontend/images/team/6.jpg') }}" alt="" loading="lazy"></a>
-                    </div>
-                    <div class="bg"></div>
-                    <div class="con">
-                        <a href="team-details.html">
-                            <div class="title"><span>Emily</span></div>
-                            <div class="subtitle"><span>Drone Photographer</span></div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            @endforelse
         </div>
     </div>
 </section>
@@ -111,28 +51,21 @@
                     <div class="testimonials-box">
                         <h5>What Are Clients Saying?</h5>
                         <div class="owl-carousel owl-theme">
-                            <div class="item">
-                                <p>Working with Gloom was an unforgettable experience. Their attention to detail and
-                                    creative vision brought our special day to life in the most beautiful way.</p> <span
-                                    class="quote"><img src="{{ asset('assets/frontend/images/quot.png') }}" alt="" loading="lazy"></span>
-                                <div class="info">
-                                    <div class="author-img"> <img src="{{ asset('assets/frontend/images/team/1.jpg') }}" alt="" loading="lazy"> </div>
-                                    <div class="cont">
-                                        <h6>Emily Brown</h6> <span>Customer</span>
+                            @foreach($testimonials as $testimonial)
+                                <div class="item">
+                                    <p>{{ $testimonial->testimonial }}</p> 
+                                    <span class="quote"><img src="{{ asset('assets/frontend/images/quot.png') }}" alt="" loading="lazy"></span>
+                                    <div class="info">
+                                        <div class="author-img">
+                                            <i class="ti-user" style="font-size: 40px; color: #aa8453;"></i>
+                                        </div>
+                                        <div class="cont">
+                                            <h6>{{ $testimonial->client_name }}</h6> 
+                                            <span>{{ $testimonial->client_position ?? 'Customer' }}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="item">
-                                <p>Working with Gloom was an unforgettable experience. Their attention to detail and
-                                    creative vision brought our special day to life in the most beautiful way.</p> <span
-                                    class="quote"><img src="{{ asset('assets/frontend/images/quot.png') }}" alt="" loading="lazy"></span>
-                                <div class="info">
-                                    <div class="author-img"> <img src="{{ asset('assets/frontend/images/team/2.jpg') }}" alt="" loading="lazy"> </div>
-                                    <div class="cont">
-                                        <h6>Jason White</h6> <span>Customer</span>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

@@ -165,7 +165,7 @@
                 <div class="col-md-5 mb-30">
                     <h4 class="wow" data-splitting>Let’s capture the perfect shots together.</h4>
                     <div class="btn-wrap mt-30 text-left wow fadeInUp" data-wow-delay=".6s">
-                        <div class="btn-link"><a href="mailto:hello@gloom.com">hello@gloom.com</a><span
+                        <div class="btn-link"><a href="mailto:info@newwavemotorsport.com">info@newwavemotorsport.com</a><span
                                 class="btn-block color3 animation-bounce"></span></div>
                     </div>
                 </div>
@@ -174,28 +174,21 @@
                     <div class="testimonials-box">
                         <h5>What Are Clients Saying?</h5>
                         <div class="owl-carousel owl-theme">
-                            <div class="item">
-                                <p>Working with Gloom was an unforgettable experience. Their attention to detail and
-                                    creative vision brought our special day to life in the most beautiful way.</p> <span
-                                    class="quote"><img src="{{ asset('assets/frontend/images/quot.png') }}" alt="" loading="lazy"></span>
-                                <div class="info">
-                                    <div class="author-img"> <img src="{{ asset('assets/frontend/images/team/1.jpg') }}" alt="" loading="lazy"> </div>
-                                    <div class="cont">
-                                        <h6>Emily Brown</h6> <span>Customer</span>
+                            @foreach($testimonials as $testimonial)
+                                <div class="item">
+                                    <p>{{ $testimonial->testimonial }}</p> 
+                                    <span class="quote"><img src="{{ asset('assets/frontend/images/quot.png') }}" alt="" loading="lazy"></span>
+                                    <div class="info">
+                                        <div class="author-img">
+                                            <i class="ti-user" style="font-size: 40px; color: #aa8453;"></i>
+                                        </div>
+                                        <div class="cont">
+                                            <h6>{{ $testimonial->client_name }}</h6> 
+                                            <span>{{ $testimonial->client_position ?? 'Customer' }}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="item">
-                                <p>Working with Gloom was an unforgettable experience. Their attention to detail and
-                                    creative vision brought our special day to life in the most beautiful way.</p> <span
-                                    class="quote"><img src="{{ asset('assets/frontend/images/quot.png') }}" alt="" loading="lazy"></span>
-                                <div class="info">
-                                    <div class="author-img"> <img src="{{ asset('assets/frontend/images/team/2.jpg') }}" alt="" loading="lazy"> </div>
-                                    <div class="cont">
-                                        <h6>Jason White</h6> <span>Customer</span>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

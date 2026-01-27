@@ -310,9 +310,9 @@
                                 <i class="uil-edit-alt me-2"></i> Content <div class="arrow-down"></div>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="topnav-content">
-                                <a href="#" class="dropdown-item"><i class="uil-cog me-2"></i>Services</a>
-                                <a href="#" class="dropdown-item"><i class="uil-chat-bubble-user me-2"></i>Testimonials</a>
-                                <a href="#" class="dropdown-item"><i class="uil-question-circle me-2"></i>FAQ</a>
+                                <a href="{{ route('admin.team-members.index') }}" class="dropdown-item"><i class="uil-users-alt me-2"></i>Team Members</a>
+                                <a href="{{ route('admin.testimonials.index') }}" class="dropdown-item"><i class="uil-chat-bubble-user me-2"></i>Testimonials</a>
+                                <a href="{{ route('admin.service-pricing.index') }}" class="dropdown-item"><i class="uil-dollar-alt me-2"></i>Service Pricing</a>
                             </div>
                         </li>
 
@@ -363,8 +363,6 @@
                                 <i class="uil-setting me-2"></i> Settings <div class="arrow-down"></div>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="topnav-settings">
-                                <a href="#" class="dropdown-item"><i class="uil-users-alt me-2"></i>Team Members</a>
-                                <a href="#" class="dropdown-item"><i class="uil-dollar-alt me-2"></i>Pricing Plans</a>
                                 <a href="#" class="dropdown-item"><i class="uil-info-circle me-2"></i>Site Information</a>
                             </div>
                         </li>

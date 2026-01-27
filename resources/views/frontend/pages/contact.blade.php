@@ -16,7 +16,7 @@
                     <div class="wrap-block"> <span class="icon et-phone"></span>
                         <div class="text-block">
                             <h5>Phone</h5>
-                            <p>+1 800 845 00 00</p>
+                            <p>+260 XXX XXX XXX</p>
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                     <div class="wrap-block"> <span class="icon et-map-pin"></span>
                         <div class="text-block">
                             <h5>Address</h5>
-                            <p>750 St, Office 1138, San Francisco, CA 94108</p>
+                            <p>Lusaka, Zambia</p>
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                     <div class="wrap-block"> <span class="icon et-notebook"></span>
                         <div class="text-block">
                             <h5>E-Mail</h5>
-                            <p>hello@dbrown.com</p>
+                            <p>info@newwavemotorsport.com</p>
                         </div>
                     </div>
                 </div>
