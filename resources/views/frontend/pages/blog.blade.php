@@ -17,12 +17,12 @@
                     @forelse($blogs as $blog)
                         <div class="col-md-12">
                             <div class="item">
-                                <div class="post-img br-5px">
+                                <div class="post-img br-5px blog-listing-image">
                                     <a href="{{ route('blog.show', $blog->slug) }}">
                                         @if($blog->image)
-                                            <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" loading="lazy">
+                                            <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" loading="lazy" style="max-height: 450px; width: 100%; object-fit: cover;">
                                         @else
-                                            <img src="{{ asset('assets/frontend/images/slider/03.jpg') }}" alt="{{ $blog->title }}" loading="lazy">
+                                            <img src="{{ asset('assets/frontend/images/slider/03.jpg') }}" alt="{{ $blog->title }}" loading="lazy" style="max-height: 450px; width: 100%; object-fit: cover;">
                                         @endif
                                     </a>
                                     <div class="date">
@@ -110,9 +110,9 @@
                                         <li>
                                             <div class="thum br-5px">
                                                 @if($recentPost->image)
-                                                    <img src="{{ asset('storage/' . $recentPost->image) }}" alt="{{ $recentPost->title }}" loading="lazy">
+                                                    <img src="{{ asset('storage/' . $recentPost->image) }}" alt="{{ $recentPost->title }}" loading="lazy" style="width: 80px; height: 80px; object-fit: cover;">
                                                 @else
-                                                    <img src="{{ asset('assets/frontend/images/slider/03.jpg') }}" alt="{{ $recentPost->title }}" loading="lazy">
+                                                    <img src="{{ asset('assets/frontend/images/slider/03.jpg') }}" alt="{{ $recentPost->title }}" loading="lazy" style="width: 80px; height: 80px; object-fit: cover;">
                                                 @endif
                                             </div>
                                             <a href="{{ route('blog.show', $recentPost->slug) }}">{{ $recentPost->title }}</a>
