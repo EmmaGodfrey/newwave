@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactSetting;
 use App\Models\TeamMember;
 use App\Models\Testimonial;
 use App\Models\ServicePricing;
@@ -39,14 +40,16 @@ class HomeController extends Controller
         $testimonials = Testimonial::active()->ordered()->take(2)->get();
         $pricing = ServicePricing::active()->ordered()->take(3)->get();
         $services = ServicePricing::active()->ordered()->get();
-        return view('frontend.pages.home', compact('testimonials', 'pricing', 'services'));
+        $contactSettings = ContactSetting::first();
+        return view('frontend.pages.home', compact('testimonials', 'pricing', 'services', 'contactSettings'));
     }
 
     public function about()
     {
         $teamMembers = TeamMember::active()->ordered()->get();
         $testimonials = Testimonial::active()->ordered()->take(2)->get();
-        return view('frontend.pages.about', compact('teamMembers', 'testimonials'));
+        $contactSettings = ContactSetting::first();
+        return view('frontend.pages.about', compact('teamMembers', 'testimonials', 'contactSettings'));
     }
 
     public function services()
@@ -83,7 +86,9 @@ class HomeController extends Controller
 
     public function faq()
     {
-        return view('frontend.pages.faq');
+        $faqs = \App\Models\Faq::active()->ordered()->get();
+        $testimonials = Testimonial::active()->ordered()->take(2)->get();
+        return view('frontend.pages.faq', compact('faqs', 'testimonials'));
     }
 
     public function testimonials()

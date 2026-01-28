@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\ContactSetting;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +28,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+        
+        View::composer('*', function ($view) {
+            $view->with('globalContactSettings', ContactSetting::first());
+        });
     }
 }

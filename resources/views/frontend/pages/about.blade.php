@@ -11,7 +11,7 @@
                 <p class="mt-30 wow fadeInUp" data-wow-delay="0.3s"> New Wave Motorsport is a motorsport-focused photography and videography brand built to capture speed, culture, and community. More than just visuals, we document the energy of the motorsport scene and give both established and upcoming enthusiasts a platform to be seen. </p>
                 <p class="wow fadeInUp" data-wow-delay="0.6s"> Founded in 2023 with a simple vision: to tell motorsport stories authentically. We started with nothing more than a phone, passion, and consistency—covering local car culture, spinning sessions, practice runs, and events while learning and improving with every shoot. </p>
                 <div class="btn-wrap wow fadeInUp text-left mt-30 mb-30" data-wow-delay="0.9s">
-                    <div class="btn-link"> <a href="mailto:info@newwavemotorsport.com">info@newwavemotorsport.com</a> <span
+                    <div class="btn-link"> <a href="mailto:{{ $contactSettings->email ?? 'info@newwavemotorsport.com' }}">{{ $contactSettings->email ?? 'info@newwavemotorsport.com' }}</a> <span
                             class="btn-block color1 animation-bounce"></span> </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@
                 <div class="col-md-5 mb-30">
                     <h4 class="wow" data-splitting>Let's build the global motorsport community together.</h4>
                     <div class="btn-wrap mt-30 text-left wow fadeInUp" data-wow-delay=".9s">
-                        <div class="btn-link"><a href="mailto:info@newwavemotorsport.com">info@newwavemotorsport.com</a><span
+                        <div class="btn-link"><a href="mailto:{{ $contactSettings->email ?? 'info@newwavemotorsport.com' }}">{{ $contactSettings->email ?? 'info@newwavemotorsport.com' }}</a><span
                                 class="btn-block color3 animation-bounce"></span></div>
                     </div>
                 </div>

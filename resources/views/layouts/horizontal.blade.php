@@ -352,6 +352,26 @@
                             </div>
                         </li>
 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-contact" role="button">
+                                <i class="uil-envelope me-2"></i> Contact <div class="arrow-down"></div>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="topnav-contact">
+                                <a href="{{ route('admin.contact.settings.edit') }}" class="dropdown-item">
+                                    <i class="uil-setting me-2"></i>Contact Settings
+                                </a>
+                                <a href="{{ route('admin.contact.messages.index') }}" class="dropdown-item">
+                                    <i class="uil-envelope-open me-2"></i>Messages
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.faqs.index') }}">
+                                <i class="uil-question-circle me-2"></i> FAQs
+                            </a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.users.index') }}">
                                 <i class="uil-users-alt me-2"></i> Users

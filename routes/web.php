@@ -28,7 +28,8 @@ Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name
 Route::get('/blog/search', [App\Http\Controllers\BlogController::class, 'search'])->name('blog.search');
 Route::get('/blog/category/{categorySlug}', [App\Http\Controllers\BlogController::class, 'category'])->name('blog.category');
 Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
-Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
+Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [App\Http\Controllers\ContactController::class, 'submit'])->name('contact.submit');
 Route::get('/pricing', [App\Http\Controllers\HomeController::class, 'pricing'])->name('pricing');
 Route::get('/team', [App\Http\Controllers\HomeController::class, 'team'])->name('team');
 Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faq'])->name('faq');
@@ -136,6 +137,27 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         'edit' => 'admin.service-pricing.edit',
         'update' => 'admin.service-pricing.update',
         'destroy' => 'admin.service-pricing.destroy',
+    ]);
+    
+    // Contact Management
+    Route::prefix('contact')->name('admin.contact.')->group(function () {
+        Route::get('settings', [App\Http\Controllers\Admin\ContactSettingController::class, 'edit'])->name('settings.edit');
+        Route::put('settings', [App\Http\Controllers\Admin\ContactSettingController::class, 'update'])->name('settings.update');
+        
+        Route::get('messages', [App\Http\Controllers\Admin\ContactMessageController::class, 'index'])->name('messages.index');
+        Route::get('messages/{id}', [App\Http\Controllers\Admin\ContactMessageController::class, 'show'])->name('messages.show');
+        Route::delete('messages/{id}', [App\Http\Controllers\Admin\ContactMessageController::class, 'destroy'])->name('messages.destroy');
+    });
+    
+    // FAQ Management
+    Route::resource('faqs', App\Http\Controllers\Admin\FaqController::class)->names([
+        'index' => 'admin.faqs.index',
+        'create' => 'admin.faqs.create',
+        'store' => 'admin.faqs.store',
+        'show' => 'admin.faqs.show',
+        'edit' => 'admin.faqs.edit',
+        'update' => 'admin.faqs.update',
+        'destroy' => 'admin.faqs.destroy',
     ]);
     
     // Catch-all route for admin

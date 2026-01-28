@@ -34,17 +34,16 @@
         </div>
 
         <!-- Event Images Gallery -->
-        <div class="row">
+        <div class="row g-3">
             @forelse($event->images as $image)
-                <div class="col-lg-4 col-md-6 mb-30">
-                    <div class="gallery-box">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                    <div class="gallery-box h-100">
                         <div class="gallery-img"> 
                             <img src="{{ asset('storage/' . $image->image_path) }}" 
-                                 class="img-fluid mx-auto d-block" 
+                                 class="img-fluid gallery-image" 
                                  alt="{{ $image->title ?: $event->title }}"
                                  data-bs-toggle="modal" 
-                                 data-bs-target="#imageModal{{ $image->id }}"
-                                 style="cursor: pointer; width: 100%; height: 300px; object-fit: cover;"> 
+                                 data-bs-target="#imageModal{{ $image->id }}"> 
                         </div>
                         @if($image->title || $image->description)
                             <div class="gallery-detail">
@@ -174,14 +173,57 @@
     margin-right: 5px;
 }
 
-.gallery-img img {
-    transition: transform 0.3s ease;
+/* Gallery Grid Styles */
+.gallery-item {
+    margin-bottom: 0;
 }
 
-.gallery-img img:hover {
-    transform: scale(1.05);
+.gallery-box {
+    overflow: hidden;
+    border-radius: 10px;
+    background: #000;
+    height: 100%;
 }
 
+.gallery-img {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.gallery-image {
+    cursor: pointer;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+    display: block;
+}
+
+.gallery-image:hover {
+    transform: scale(1.08);
+    opacity: 0.9;
+}
+
+.gallery-detail {
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 0 0 10px 10px;
+}
+
+.gallery-detail h5 {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.gallery-detail p {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+/* Modal Styles */
 .modal-content {
     border: none;
     border-radius: 15px;
@@ -191,5 +233,40 @@
     border-bottom: 1px solid #e9ecef;
     background-color: #f8f9fa;
     border-radius: 15px 15px 0 0;
+}
+
+.modal-body img {
+    border-radius: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 575px) {
+    .gallery-image {
+        height: 200px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .gallery-image {
+        height: 220px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .gallery-image {
+        height: 230px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .gallery-image {
+        height: 240px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .gallery-image {
+        height: 260px;
+    }
 }
 </style>

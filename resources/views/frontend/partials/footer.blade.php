@@ -4,13 +4,13 @@
             <div class="col-lg-3 col-md-12"><a href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/newwavelogo.png') }}" alt="NewWave"></a></div>
             <div class="col-lg-3 col-md-12">
                 <h5>Get in touch</h5>
-                <p>info@newwavemotorsport.com
-                    <br>+260 XXX XXX XXX
+                <p><a href="mailto:{{ $globalContactSettings->email ?? 'info@newwavemotorsport.com' }}" style="color: inherit; text-decoration: none;">{{ $globalContactSettings->email ?? 'info@newwavemotorsport.com' }}</a>
+                    <br><a href="tel:{{ $globalContactSettings->phone ?? '+260XXXXXXXXX' }}" style="color: inherit; text-decoration: none;">{{ $globalContactSettings->phone ?? '+260 XXX XXX XXX' }}</a>
                 </p>
             </div>
             <div class="col-lg-3 col-md-12">
                 <h5>Location</h5>
-                <p>Lusaka — Zambia
+                <p>{{ $globalContactSettings->address ?? 'Lusaka — Zambia' }}
                     <br>
                 </p>
             </div>

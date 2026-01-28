@@ -19,6 +19,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="{{ route('pricing') }}" class="dropdown-item"><span>Pricing</span></a></li>
                         <li><a href="{{ route('team') }}" class="dropdown-item"><span>Team</span></a></li>
+                        <li><a href="{{ route('faq') }}" class="dropdown-item"><span>FAQs</span></a></li>
                         <li><a href="{{ route('testimonials') }}" class="dropdown-item"><span>Testimonials</span></a></li>
                     </ul>
                 </li>
