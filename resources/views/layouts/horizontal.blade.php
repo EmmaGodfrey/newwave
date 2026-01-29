@@ -13,7 +13,7 @@
                     </span>
                 </a>
 
-                <a href="{{url('index')}}" class="logo logo-light">
+                <a href="{{route('admin.dashboard')}}" class="logo logo-light">
                     <span class="logo-sm">
                         <img src="{{ URL::asset('/assets/frontend/images/newwavelogo.png') }}" alt="NewWave"
                             height="22">
