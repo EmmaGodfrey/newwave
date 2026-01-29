@@ -46,41 +46,8 @@
     </div>
 </div>
 
-<!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Confirm Delete</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you want to delete the category <strong id="categoryName"></strong>?</p>
-                <p class="text-danger"><small>This action cannot be undone. Categories with existing blog posts cannot be deleted.</small></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <form id="deleteForm" method="POST" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 @endsection
 
 @section('script')
 {!! $dataTable->scripts() !!}
-
-<script>
-function confirmDelete(categoryId, categoryName) {
-    document.getElementById('categoryName').textContent = categoryName || 'this category';
-    document.getElementById('deleteForm').action = '{{ url("admin/blog-categories") }}/' + categoryId;
-    const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    modal.show();
-}
-</script>
 @endsection

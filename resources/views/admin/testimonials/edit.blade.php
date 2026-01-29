@@ -9,15 +9,15 @@
     @slot('title') Edit Testimonial @endslot
 @endcomponent
 
+<form action="{{ route('admin.testimonials.update', $testimonial) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+
 <div class="row">
     <div class="col-lg-8">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Testimonial Information</h4>
-
-                <form action="{{ route('admin.testimonials.update', $testimonial) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
 
                     <div class="mb-3">
                         <label for="client_name" class="form-label">Client Name <span class="text-danger">*</span></label>
@@ -54,12 +54,6 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
-                    <div class="mt-4">
-                        <button type="submit" class="btn btn-primary">Update Testimonial</button>
-                        <a href="{{ route('admin.testimonials.index') }}" class="btn btn-secondary">Cancel</a>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -120,6 +114,7 @@
 
                 <div class="mb-3">
                     <div class="form-check form-switch">
+                        <input type="hidden" name="is_active" value="0">
                         <input type="checkbox" class="form-check-input" id="is_active" 
                                name="is_active" value="1" {{ old('is_active', $testimonial->is_active) ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_active">Active</label>
@@ -129,6 +124,15 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Update Testimonial</button>
+        <a href="{{ route('admin.testimonials.index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</div>
+
+</form>
 
 @endsection
 

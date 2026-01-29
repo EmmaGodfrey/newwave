@@ -70,16 +70,16 @@
                             @php
                                 $socialLinks = old('social_links', $teamMember->social_links ?? []);
                             @endphp
-                            @if($socialLinks)
-                                @foreach($socialLinks as $platform => $url)
+                            @if($socialLinks && count($socialLinks) > 0)
+                                @foreach($socialLinks as $index => $link)
                                 <div class="row mb-2 social-link-row">
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" name="social_links[{{ $loop->index }}][platform]" 
-                                               placeholder="Platform (e.g., Facebook)" value="{{ $platform }}">
+                                        <input type="text" class="form-control" name="social_links[{{ $index }}][platform]" 
+                                               placeholder="Platform (e.g., Facebook)" value="{{ is_array($link) ? ($link['platform'] ?? '') : $index }}">
                                     </div>
                                     <div class="col-md-7">
-                                        <input type="url" class="form-control" name="social_links[{{ $loop->index }}][url]" 
-                                               placeholder="URL" value="{{ $url }}">
+                                        <input type="url" class="form-control" name="social_links[{{ $index }}][url]" 
+                                               placeholder="URL" value="{{ is_array($link) ? ($link['url'] ?? '') : $link }}">
                                     </div>
                                     <div class="col-md-1">
                                         <button type="button" class="btn btn-danger btn-sm remove-social-link">

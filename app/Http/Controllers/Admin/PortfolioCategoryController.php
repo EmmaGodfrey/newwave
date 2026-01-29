@@ -31,7 +31,7 @@ class PortfolioCategoryController extends Controller
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->name);
-        $data['is_active'] = $request->has('is_active');
+        $data['is_active'] = $request->input('is_active', 0) == 1;
 
         PortfolioCategory::create($data);
 
@@ -61,7 +61,7 @@ class PortfolioCategoryController extends Controller
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->name);
-        $data['is_active'] = $request->has('is_active');
+        $data['is_active'] = $request->input('is_active', 0) == 1;
 
         $category->update($data);
 

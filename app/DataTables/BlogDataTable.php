@@ -22,9 +22,10 @@ class BlogDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($blog) {
+                $deleteUrl = route('admin.blogs.destroy', $blog->id);
                 return '
                     <a href="' . route('admin.blogs.edit', $blog->id) . '" class="btn btn-sm btn-primary">Edit</a>
-                    <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete(' . $blog->id . ', \'' . addslashes($blog->title) . '\')">Delete</button>
+                    <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="' . $blog->id . '" data-name="' . htmlspecialchars($blog->title, ENT_QUOTES) . '" data-url="' . htmlspecialchars($deleteUrl, ENT_QUOTES) . '">Delete</button>
                 ';
             })
             ->addColumn('category', function ($blog) {

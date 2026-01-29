@@ -41,8 +41,8 @@ class PortfolioEventController extends Controller
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->title);
-        $data['is_featured'] = $request->has('is_featured');
-        $data['is_active'] = $request->has('is_active');
+        $data['is_featured'] = $request->input('is_featured', 0) == 1;
+        $data['is_active'] = $request->input('is_active', 0) == 1;
 
         if ($request->hasFile('featured_image')) {
             $data['featured_image'] = $request->file('featured_image')
@@ -98,8 +98,8 @@ class PortfolioEventController extends Controller
 
         $data = $request->all();
         $data['slug'] = Str::slug($request->title);
-        $data['is_featured'] = $request->has('is_featured');
-        $data['is_active'] = $request->has('is_active');
+        $data['is_featured'] = $request->input('is_featured', 0) == 1;
+        $data['is_active'] = $request->input('is_active', 0) == 1;
 
         if ($request->hasFile('featured_image')) {
             // Delete old image

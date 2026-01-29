@@ -15,9 +15,10 @@ class FaqDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($faq) {
+                $deleteUrl = route('admin.faqs.destroy', $faq->id);
                 return '
                     <a href="' . route('admin.faqs.edit', $faq->id) . '" class="btn btn-sm btn-primary">Edit</a>
-                    <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete(' . $faq->id . ', \'' . addslashes($faq->question) . '\')">Delete</button>
+                    <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="' . $faq->id . '" data-name="' . htmlspecialchars($faq->question, ENT_QUOTES) . '" data-url="' . htmlspecialchars($deleteUrl, ENT_QUOTES) . '">Delete</button>
                 ';
             })
             ->addColumn('status', function ($faq) {

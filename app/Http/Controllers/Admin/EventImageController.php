@@ -96,7 +96,7 @@ class EventImageController extends Controller
         ]);
 
         $data = $request->all();
-        $data['is_featured'] = $request->has('is_featured');
+        $data['is_featured'] = $request->input('is_featured', 0) == 1;
 
         if ($request->hasFile('image')) {
             // Delete old image

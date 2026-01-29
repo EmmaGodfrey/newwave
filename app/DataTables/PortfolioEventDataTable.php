@@ -57,6 +57,7 @@ class PortfolioEventDataTable extends DataTable
                 }
             })
             ->addColumn('actions', function ($event) {
+                $deleteUrl = route('admin.portfolio.events.destroy', $event->id);
                 $actions = '<div class="btn-group" role="group">';
                 $actions .= '<a href="' . route('admin.portfolio.events.show', $event) . '" class="btn btn-sm btn-outline-info" title="View">';
                 $actions .= '<i class="bx bx-show"></i></a>';
@@ -64,7 +65,7 @@ class PortfolioEventDataTable extends DataTable
                 $actions .= '<i class="bx bx-edit"></i></a>';
                 $actions .= '<a href="' . route('portfolio.event', $event->slug) . '" target="_blank" class="btn btn-sm btn-outline-secondary" title="View on Site">';
                 $actions .= '<i class="bx bx-link-external"></i></a>';
-                $actions .= '<button type="button" class="btn btn-sm btn-outline-danger delete-event" data-id="' . $event->id . '" data-name="' . e($event->title) . '" title="Delete">';
+                $actions .= '<button type="button" class="btn btn-sm btn-outline-danger delete-btn" data-id="' . $event->id . '" data-name="' . htmlspecialchars($event->title, ENT_QUOTES) . '" data-url="' . $deleteUrl . '" title="Delete">';
                 $actions .= '<i class="bx bx-trash"></i></button>';
                 $actions .= '</div>';
                 return $actions;

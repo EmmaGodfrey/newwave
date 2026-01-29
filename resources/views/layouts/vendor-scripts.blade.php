@@ -6,9 +6,14 @@
  <script src="{{ URL::asset('/assets/libs/node-waves/node-waves.min.js')}}"></script>
  <script src="{{ URL::asset('/assets/libs/waypoints/waypoints.min.js')}}"></script>
  <script src="{{ URL::asset('/assets/libs/jquery-counterup/jquery-counterup.min.js')}}"></script>
-  <!-- DataTables -->
+ <!-- DataTables -->
  <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js')}}"></script>
 
+ <!-- SweetAlert2 -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+ <!-- Admin Form Handlers -->
+ <script src="{{ URL::asset('/assets/js/admin-form-handlers.js')}}"></script>
 
  @yield('script')
 

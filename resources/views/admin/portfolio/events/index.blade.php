@@ -46,51 +46,8 @@
     </div>
 </div>
 
-<!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Confirm Delete</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you want to delete the event <strong id="eventName"></strong>?</p>
-                <p class="text-danger"><small>This action cannot be undone and will also delete all associated images.</small></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <form id="deleteForm" method="POST" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 @endsection
 
 @section('script')
 {!! $dataTable->scripts() !!}
-
-<script>
-function confirmDelete(eventId, eventName) {
-    document.getElementById('eventName').textContent = eventName;
-    document.getElementById('deleteForm').action = '{{ url("admin/portfolio/events") }}/' + eventId;
-    new bootstrap.Modal(document.getElementById('deleteModal')).show();
-}
-
-$(document).ready(function() {
-    // Handle DataTable delete buttons
-    $(document).on('click', '.delete-event', function() {
-        const button = $(this);
-        const eventId = button.data('id');
-        const eventName = button.data('name') || 'this event';
-        
-        confirmDelete(eventId, eventName);
-    });
-});
-</script>
 @endsection

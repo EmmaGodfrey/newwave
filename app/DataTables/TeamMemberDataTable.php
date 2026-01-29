@@ -16,9 +16,10 @@ class TeamMemberDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($member) {
+                $deleteUrl = route('admin.team-members.destroy', $member->id);
                 return '
                     <a href="' . route('admin.team-members.edit', $member->id) . '" class="btn btn-sm btn-primary">Edit</a>
-                    <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete(' . $member->id . ', \'' . addslashes($member->name) . '\')">Delete</button>
+                    <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="' . e($member->id) . '" data-name="' . e($member->name) . '" data-url="' . e($deleteUrl) . '">Delete</button>
                 ';
             })
             ->addColumn('image', function ($member) {

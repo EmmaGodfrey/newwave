@@ -16,9 +16,10 @@ class ServicePricingDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($service) {
+                $deleteUrl = route('admin.service-pricing.destroy', $service->id);
                 return '
                     <a href="' . route('admin.service-pricing.edit', $service->id) . '" class="btn btn-sm btn-primary">Edit</a>
-                    <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete(' . $service->id . ', \'' . addslashes($service->name) . '\')">Delete</button>
+                    <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="' . e($service->id) . '" data-name="' . e($service->name) . '" data-url="' . e($deleteUrl) . '">Delete</button>
                 ';
             })
             ->addColumn('status', function ($service) {

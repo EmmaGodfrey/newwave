@@ -38,7 +38,7 @@ class TeamMemberController extends Controller
             $validated['image'] = $request->file('image')->store('team-members', 'public');
         }
 
-        $validated['is_active'] = $request->has('is_active');
+        $validated['is_active'] = $request->input('is_active', 0) == 1;
         $validated['order'] = $validated['order'] ?? 0;
 
         TeamMember::create($validated);
@@ -72,7 +72,7 @@ class TeamMemberController extends Controller
             $validated['image'] = $request->file('image')->store('team-members', 'public');
         }
 
-        $validated['is_active'] = $request->has('is_active');
+        $validated['is_active'] = $request->input('is_active', 0) == 1;
         $validated['order'] = $validated['order'] ?? $teamMember->order;
 
         $teamMember->update($validated);

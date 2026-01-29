@@ -35,8 +35,8 @@ class ServicePricingController extends Controller
             'is_active' => 'nullable|boolean',
         ]);
 
-        $validated['is_active'] = $request->has('is_active');
-        $validated['is_featured'] = $request->has('is_featured');
+        $validated['is_active'] = $request->input('is_active', 0) == 1;
+        $validated['is_featured'] = $request->input('is_featured', 0) == 1;
         $validated['order'] = $validated['order'] ?? 0;
         $validated['price_label'] = $validated['price_label'] ?? 'Starting at';
 
@@ -66,8 +66,8 @@ class ServicePricingController extends Controller
             'is_active' => 'nullable|boolean',
         ]);
 
-        $validated['is_active'] = $request->has('is_active');
-        $validated['is_featured'] = $request->has('is_featured');
+        $validated['is_active'] = $request->input('is_active', 0) == 1;
+        $validated['is_featured'] = $request->input('is_featured', 0) == 1;
         $validated['order'] = $validated['order'] ?? $servicePricing->order;
 
         $servicePricing->update($validated);

@@ -41,48 +41,8 @@
     </div>
 </div>
 
-<!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this FAQ: <strong id="deleteName"></strong>?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <form id="deleteForm" method="POST" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 @endsection
 
 @section('script')
 {!! $dataTable->scripts() !!}
-
-<script>
-function confirmDelete(faqId, faqQuestion) {
-    document.getElementById('deleteName').textContent = faqQuestion || 'this FAQ';
-    document.getElementById('deleteForm').action = '{{ url("admin/faqs") }}/' + faqId;
-    const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    modal.show();
-}
-
-// Wait for DataTable to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Handle DataTable delete buttons
-    $(document).on('click', '[onclick^="confirmDelete"]', function(e) {
-        e.preventDefault();
-    });
-});
-</script>
 @endsection

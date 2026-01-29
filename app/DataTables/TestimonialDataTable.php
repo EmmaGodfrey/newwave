@@ -16,9 +16,10 @@ class TestimonialDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($testimonial) {
+                $deleteUrl = route('admin.testimonials.destroy', $testimonial->id);
                 return '
                     <a href="' . route('admin.testimonials.edit', $testimonial->id) . '" class="btn btn-sm btn-primary">Edit</a>
-                    <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete(' . $testimonial->id . ', \'' . addslashes($testimonial->client_name) . '\')">Delete</button>
+                    <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="' . $testimonial->id . '" data-name="' . htmlspecialchars($testimonial->client_name, ENT_QUOTES) . '" data-url="' . htmlspecialchars($deleteUrl, ENT_QUOTES) . '">Delete</button>
                 ';
             })
             ->addColumn('image', function ($testimonial) {

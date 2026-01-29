@@ -37,7 +37,7 @@ class TestimonialController extends Controller
             $validated['client_image'] = $request->file('client_image')->store('testimonials', 'public');
         }
 
-        $validated['is_active'] = $request->has('is_active');
+        $validated['is_active'] = $request->input('is_active', 0) == 1;
         $validated['order'] = $validated['order'] ?? 0;
         $validated['rating'] = $validated['rating'] ?? 5;
 
@@ -71,7 +71,7 @@ class TestimonialController extends Controller
             $validated['client_image'] = $request->file('client_image')->store('testimonials', 'public');
         }
 
-        $validated['is_active'] = $request->has('is_active');
+        $validated['is_active'] = $request->input('is_active', 0) == 1;
         $validated['order'] = $validated['order'] ?? $testimonial->order;
         $validated['rating'] = $validated['rating'] ?? $testimonial->rating;
 
