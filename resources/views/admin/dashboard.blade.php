@@ -15,28 +15,11 @@
             <div class="card-body">
                 <div class="d-flex">
                     <div class="flex-grow-1">
-                        <p class="text-truncate font-size-14 mb-2">Total Users</p>
-                        <h4 class="mb-2">1,235</h4>
-                        <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>9.23%</span>from previous period</p>
-                    </div>
-                    <div class="avatar-sm">
-                        <span class="avatar-title bg-light text-primary rounded-3">
-                            <i class="ri-user-line font-size-24"></i>  
-                        </span>
-                    </div>
-                </div>                                              
-            </div><!-- end cardbody -->
-        </div><!-- end card -->
-    </div><!-- end col -->
-    
-    <div class="col-xl-3 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex">
-                    <div class="flex-grow-1">
                         <p class="text-truncate font-size-14 mb-2">Blog Posts</p>
-                        <h4 class="mb-2">42</h4>
-                        <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>12.5%</span>from previous period</p>
+                        <h4 class="mb-2">{{ $totalBlogs }}</h4>
+                        <p class="text-muted mb-0">
+                            <span class="text-success fw-bold font-size-12">{{ $publishedBlogs }} Published</span>
+                        </p>
                     </div>
                     <div class="avatar-sm">
                         <span class="avatar-title bg-light text-success rounded-3">
@@ -54,8 +37,10 @@
                 <div class="d-flex">
                     <div class="flex-grow-1">
                         <p class="text-truncate font-size-14 mb-2">Portfolio Items</p>
-                        <h4 class="mb-2">28</h4>
-                        <p class="text-muted mb-0"><span class="text-danger fw-bold font-size-12 me-2"><i class="ri-arrow-right-down-line me-1 align-middle"></i>3.2%</span>from previous period</p>
+                        <h4 class="mb-2">{{ $totalPortfolio }}</h4>
+                        <p class="text-muted mb-0">
+                            <a href="{{ route('admin.portfolio.events.index') }}" class="text-muted">View All <i class="mdi mdi-arrow-right"></i></a>
+                        </p>
                     </div>
                     <div class="avatar-sm">
                         <span class="avatar-title bg-light text-info rounded-3">
@@ -73,12 +58,35 @@
                 <div class="d-flex">
                     <div class="flex-grow-1">
                         <p class="text-truncate font-size-14 mb-2">Team Members</p>
-                        <h4 class="mb-2">12</h4>
-                        <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>2.1%</span>from previous period</p>
+                        <h4 class="mb-2">{{ $totalTeamMembers }}</h4>
+                        <p class="text-muted mb-0">
+                            <a href="{{ route('admin.team-members.index') }}" class="text-muted">Manage Team <i class="mdi mdi-arrow-right"></i></a>
+                        </p>
                     </div>
                     <div class="avatar-sm">
                         <span class="avatar-title bg-light text-warning rounded-3">
                             <i class="ri-team-line font-size-24"></i>  
+                        </span>
+                    </div>
+                </div>                                              
+            </div><!-- end cardbody -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <p class="text-truncate font-size-14 mb-2">Testimonials</p>
+                        <h4 class="mb-2">{{ $totalTestimonials }}</h4>
+                        <p class="text-muted mb-0">
+                            <a href="{{ route('admin.testimonials.index') }}" class="text-muted">View All <i class="mdi mdi-arrow-right"></i></a>
+                        </p>
+                    </div>
+                    <div class="avatar-sm">
+                        <span class="avatar-title bg-light text-primary rounded-3">
+                            <i class="ri-star-line font-size-24"></i>  
                         </span>
                     </div>
                 </div>                                              
@@ -91,44 +99,49 @@
     <div class="col-lg-8">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title mb-0">Recent Activities</h4>
+                <h4 class="card-title mb-0">Content Overview (Last 6 Months)</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="lineChart" data-colors='["--bs-success-rgb, 0.2", "--bs-success", "--bs-info-rgb, 0.2", "--bs-info", "--bs-warning-rgb, 0.2", "--bs-warning"]' height="60"></canvas>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Recent Blog Posts</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-nowrap mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th scope="col">Activity</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Date</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Category</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Date</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($recentBlogs as $blog)
                             <tr>
-                                <td>New blog post "Laravel Best Practices" created</td>
-                                <td><span class="badge bg-primary-subtle text-primary">Blog</span></td>
-                                <td>Jan 18, 2026</td>
-                                <td><span class="badge bg-success-subtle text-success">Published</span></td>
+                                <td>
+                                    <a href="{{ route('admin.blogs.edit', $blog->id) }}">{{ Str::limit($blog->title, 50) }}</a>
+                                </td>
+                                <td><span class="badge bg-primary-subtle text-primary">{{ $blog->category->name ?? 'N/A' }}</span></td>
+                                <td>
+                                    @if($blog->status === 'published')
+                                        <span class="badge bg-success-subtle text-success">Published</span>
+                                    @else
+                                        <span class="badge bg-warning-subtle text-warning">Draft</span>
+                                    @endif
+                                </td>
+                                <td>{{ $blog->created_at->format('M d, Y') }}</td>
                             </tr>
+                            @empty
                             <tr>
-                                <td>Portfolio item "Modern Website Design" added</td>
-                                <td><span class="badge bg-info-subtle text-info">Portfolio</span></td>
-                                <td>Jan 17, 2026</td>
-                                <td><span class="badge bg-success-subtle text-success">Active</span></td>
+                                <td colspan="4" class="text-center text-muted">No blog posts yet</td>
                             </tr>
-                            <tr>
-                                <td>New user registration</td>
-                                <td><span class="badge bg-warning-subtle text-warning">User</span></td>
-                                <td>Jan 16, 2026</td>
-                                <td><span class="badge bg-success-subtle text-success">Verified</span></td>
-                            </tr>
-                            <tr>
-                                <td>Team member profile updated</td>
-                                <td><span class="badge bg-secondary-subtle text-secondary">Team</span></td>
-                                <td>Jan 15, 2026</td>
-                                <td><span class="badge bg-success-subtle text-success">Updated</span></td>
-                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -139,46 +152,220 @@
     <div class="col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title mb-0">Quick Actions</h4>
+                <h4 class="card-title mb-0">Blog Status</h4>
             </div>
             <div class="card-body">
-                <div class="d-grid gap-2">
-                    <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
-                        <i class="ri-user-add-line me-2"></i>Add New User
-                    </a>
-                    <button class="btn btn-success">
-                        <i class="ri-article-line me-2"></i>Create Blog Post
-                    </button>
-                    <button class="btn btn-info">
-                        <i class="ri-image-add-line me-2"></i>Add Portfolio Item
-                    </button>
-                    <button class="btn btn-warning">
-                        <i class="ri-team-line me-2"></i>Add Team Member
-                    </button>
+                <canvas id="doughnut" data-colors='["--bs-success", "--bs-warning"]' height="200"></canvas>
+                <div class="mt-3">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span><i class="mdi mdi-circle text-success me-1"></i>Published</span>
+                        <span class="fw-bold">{{ $blogsByStatus['published'] }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span><i class="mdi mdi-circle text-warning me-1"></i>Draft</span>
+                        <span class="fw-bold">{{ $blogsByStatus['draft'] }}</span>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title mb-0">System Info</h4>
+                <h4 class="card-title mb-0">Quick Stats</h4>
             </div>
             <div class="card-body">
-                <div class="d-flex justify-content-between mb-2">
-                    <span>Laravel Version</span>
-                    <span class="fw-bold">{{ app()->version() }}</span>
+                <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
+                    <div>
+                        <p class="mb-1 text-muted">Messages</p>
+                        <h5 class="mb-0">{{ $totalContactMessages }}</h5>
+                    </div>
+                    <div class="avatar-sm">
+                        <span class="avatar-title bg-light text-primary rounded">
+                            <i class="mdi mdi-email-outline font-size-20"></i>
+                        </span>
+                    </div>
                 </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <span>PHP Version</span>
-                    <span class="fw-bold">{{ PHP_VERSION }}</span>
+                <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
+                    <div>
+                        <p class="mb-1 text-muted">Unread Messages</p>
+                        <h5 class="mb-0 text-danger">{{ $unreadMessages }}</h5>
+                    </div>
+                    <div class="avatar-sm">
+                        <span class="avatar-title bg-light text-danger rounded">
+                            <i class="mdi mdi-email-alert-outline font-size-20"></i>
+                        </span>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <span>Environment</span>
-                    <span class="fw-bold text-capitalize">{{ app()->environment() }}</span>
+                    <div>
+                        <p class="mb-1 text-muted">Testimonials</p>
+                        <h5 class="mb-0">{{ $totalTestimonials }}</h5>
+                    </div>
+                    <div class="avatar-sm">
+                        <span class="avatar-title bg-light text-success rounded">
+                            <i class="mdi mdi-star-outline font-size-20"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Quick Actions</h4>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-1">
+                    <a href="{{ route('admin.blogs.create') }}" class="btn btn-success">
+                        <i class="ri-article-line me-2"></i>Create Blog Post
+                    </a>
+                    <a href="{{ route('admin.portfolio.events.create') }}" class="btn btn-info">
+                        <i class="ri-image-add-line me-2"></i>Add Portfolio Item
+                    </a>
+                    <a href="{{ route('admin.team-members.create') }}" class="btn btn-warning">
+                        <i class="ri-team-line me-2"></i>Add Team Member
+                    </a>
+                    <a href="{{ route('admin.contact.messages.index') }}" class="btn btn-primary">
+                        <i class="ri-mail-line me-2"></i>View Messages
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+@endsection
+
+@section('script')
+<script src="{{ URL::asset('/assets/libs/chart-js/chart-js.min.js') }}"></script>
+<script>
+    function getChartColorsArray(chartId) {
+        if (document.getElementById(chartId) !== null) {
+            var colors = document.getElementById(chartId).getAttribute("data-colors");
+            if (colors) {
+                colors = JSON.parse(colors);
+                return colors.map(function (value) {
+                    var newValue = value.replace(" ", "");
+                    if (newValue.indexOf(",") === -1) {
+                        var color = getComputedStyle(document.documentElement).getPropertyValue(newValue);
+                        if (color) return color;
+                        else return newValue;
+                    } else {
+                        var val = value.split(',');
+                        if (val.length == 2) {
+                            var rgbaColor = getComputedStyle(document.documentElement).getPropertyValue(val[0]);
+                            rgbaColor = "rgba(" + rgbaColor + "," + val[1] + ")";
+                            return rgbaColor;
+                        } else {
+                            return newValue;
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    // Line Chart - Content Overview
+    var LinechartColors = getChartColorsArray("lineChart");
+    if (LinechartColors) {
+        var lineChart = {
+            labels: {!! json_encode($months) !!},
+            datasets: [
+                {
+                    label: "Blog Posts",
+                    fill: true,
+                    lineTension: 0.5,
+                    backgroundColor: LinechartColors[0],
+                    borderColor: LinechartColors[1],
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: LinechartColors[1],
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: LinechartColors[1],
+                    pointHoverBorderColor: "#fff",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: {!! json_encode($blogsByMonth) !!}
+                },
+                {
+                    label: "Portfolio Items",
+                    fill: true,
+                    lineTension: 0.5,
+                    backgroundColor: LinechartColors[2],
+                    borderColor: LinechartColors[3],
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: LinechartColors[3],
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: LinechartColors[3],
+                    pointHoverBorderColor: "#eef0f2",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: {!! json_encode($portfolioByMonth) !!}
+                },
+                {
+                    label: "Testimonials",
+                    fill: true,
+                    lineTension: 0.5,
+                    backgroundColor: LinechartColors[4],
+                    borderColor: LinechartColors[5],
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: LinechartColors[5],
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: LinechartColors[5],
+                    pointHoverBorderColor: "#eef0f2",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: {!! json_encode($testimonialsByMonth) !!}
+                }
+            ]
+        };
+
+        var lineOpts = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }]
+            }
+        };
+
+        var ctx = document.getElementById("lineChart").getContext("2d");
+        new Chart(ctx, {type: 'line', data: lineChart, options: lineOpts});
+    }
+
+    // Doughnut Chart - Blog Status
+    var DoughnutchartColors = getChartColorsArray("doughnut");
+    if (DoughnutchartColors) {
+        var donutChart = {
+            labels: ["Published", "Draft"],
+            datasets: [{
+                data: [{{ $blogsByStatus['published'] }}, {{ $blogsByStatus['draft'] }}],
+                backgroundColor: DoughnutchartColors,
+                hoverBackgroundColor: DoughnutchartColors,
+                hoverBorderColor: "#fff"
+            }]
+        };
+        var ctx = document.getElementById("doughnut").getContext("2d");
+        new Chart(ctx, {type: 'doughnut', data: donutChart});
+    }
+</script>
 @endsection

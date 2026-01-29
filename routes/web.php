@@ -37,7 +37,7 @@ Route::get('/testimonials', [App\Http\Controllers\HomeController::class, 'testim
 
 // Admin Routes
 Route::prefix('admin')->middleware('auth')->group(function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'admin'])->name('admin.dashboard');
+    Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
     
     // Protected admin routes
     // Users Management
