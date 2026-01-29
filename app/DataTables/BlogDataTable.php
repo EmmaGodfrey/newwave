@@ -27,6 +27,12 @@ class BlogDataTable extends DataTable
                     <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete(' . $blog->id . ', \'' . addslashes($blog->title) . '\')">Delete</button>
                 ';
             })
+            ->addColumn('category', function ($blog) {
+                if ($blog->category) {
+                    return '<span class="badge bg-info">' . htmlspecialchars($blog->category->name) . '</span>';
+                }
+                return '<span class="badge bg-secondary">Uncategorized</span>';
+            })
             ->addColumn('image', function ($blog) {
                 if ($blog->image) {
                     return '<img src="' . asset('storage/' . $blog->image) . '" alt="' . htmlspecialchars($blog->title) . '" style="max-width: 50px; height: auto;">';
@@ -46,7 +52,7 @@ class BlogDataTable extends DataTable
             ->editColumn('published_at', function ($blog) {
                 return $blog->published_at ? $blog->published_at->format('M d, Y') : '-';
             })
-            ->rawColumns(['action', 'image', 'status', 'title'])
+            ->rawColumns(['action', 'image', 'status', 'title', 'category'])
             ->setRowId('id');
     }
 
@@ -58,7 +64,7 @@ class BlogDataTable extends DataTable
      */
     public function query(Blog $model): QueryBuilder
     {
-        return $model->newQuery()->orderBy('created_at', 'desc');
+        return $model->newQuery()->with('category')->orderBy('created_at', 'desc');
     }
 
     /**

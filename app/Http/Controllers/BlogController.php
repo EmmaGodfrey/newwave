@@ -75,7 +75,9 @@ class BlogController extends Controller
             ->take(3)
             ->get();
 
-        return view('frontend.pages.blog-detail', compact('blog', 'previousPost', 'nextPost', 'recentPosts'));
+        $testimonials = Testimonial::active()->ordered()->take(2)->get();
+
+        return view('frontend.pages.blog-detail', compact('blog', 'previousPost', 'nextPost', 'recentPosts', 'testimonials'));
     }
 
     /**
