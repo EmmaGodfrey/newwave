@@ -39,8 +39,6 @@ class PortfolioCategoryDataTable extends DataTable
             ->addColumn('actions', function ($category) {
                 $deleteUrl = route('admin.portfolio.categories.destroy', $category->id);
                 $actions = '<div class="btn-group" role="group">';
-                $actions .= '<a href="' . route('admin.portfolio.categories.show', $category) . '" class="btn btn-sm btn-outline-info" title="View">';
-                $actions .= '<i class="bx bx-show"></i></a>';
                 $actions .= '<a href="' . route('admin.portfolio.categories.edit', $category) . '" class="btn btn-sm btn-outline-primary" title="Edit">';
                 $actions .= '<i class="bx bx-edit"></i></a>';
                 $actions .= '<button type="button" class="btn btn-sm btn-outline-danger delete-btn" data-id="' . $category->id . '" data-name="' . htmlspecialchars($category->name, ENT_QUOTES) . '" data-url="' . $deleteUrl . '" title="Delete">';

@@ -22,12 +22,6 @@ class TestimonialDataTable extends DataTable
                     <button type="button" class="btn btn-sm btn-danger delete-btn" data-id="' . $testimonial->id . '" data-name="' . htmlspecialchars($testimonial->client_name, ENT_QUOTES) . '" data-url="' . htmlspecialchars($deleteUrl, ENT_QUOTES) . '">Delete</button>
                 ';
             })
-            ->addColumn('image', function ($testimonial) {
-                if ($testimonial->client_image) {
-                    return '<img src="' . asset('storage/' . $testimonial->client_image) . '" alt="' . htmlspecialchars($testimonial->client_name) . '" style="max-width: 50px; height: auto; border-radius: 50%;">';
-                }
-                return '<span class="badge bg-secondary">No Image</span>';
-            })
             ->addColumn('status', function ($testimonial) {
                 $badgeClass = $testimonial->is_active ? 'success' : 'secondary';
                 return '<span class="badge bg-' . $badgeClass . '">' . ($testimonial->is_active ? 'Active' : 'Inactive') . '</span>';
@@ -38,7 +32,7 @@ class TestimonialDataTable extends DataTable
             ->editColumn('created_at', function ($testimonial) {
                 return $testimonial->created_at->format('M d, Y');
             })
-            ->rawColumns(['action', 'image', 'status', 'testimonial'])
+            ->rawColumns(['action', 'status', 'testimonial'])
             ->setRowId('id');
     }
 
@@ -70,7 +64,6 @@ class TestimonialDataTable extends DataTable
     {
         return [
             Column::make('id')->title('ID')->width(50),
-            Column::make('image')->title('Image')->orderable(false)->searchable(false),
             Column::make('client_name')->title('Client Name'),
             Column::make('client_position')->title('Position'),
             Column::make('testimonial')->title('Testimonial'),

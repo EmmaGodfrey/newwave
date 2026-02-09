@@ -110,7 +110,7 @@
                     <small class="text-muted">Recommended: Square image, min 400x400px</small>
                     
                     <div id="image-preview" class="mt-3" style="display: none;">
-                        <img src="" alt="Preview" class="img-thumbnail" style="max-width: 100%;">
+                        <img src="" alt="Preview" class="img-thumbnail" style="width: 200px; height: 200px; object-fit: cover;">
                     </div>
                 </div>
 

@@ -82,7 +82,8 @@
                                 <div class="mb-3">
                                     <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
                                     <select class="form-select @error('status') is-invalid @enderror" 
-                                            id="status" name="status" required>
+                                            id="status" name="status" required 
+                                            style="display: block !important; opacity: 1 !important; visibility: visible !important; height: auto !important;">
                                         <option value="draft" {{ old('status', $blog->status) === 'draft' ? 'selected' : '' }}>Draft</option>
                                         <option value="published" {{ old('status', $blog->status) === 'published' ? 'selected' : '' }}>Published</option>
                                     </select>
@@ -102,11 +103,17 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="category" class="form-label">Category</label>
-                                    <input type="text" class="form-control @error('category') is-invalid @enderror" 
-                                           id="category" name="category" value="{{ old('category', $blog->category) }}" 
-                                           placeholder="e.g., Wedding, Fashion, Travel">
-                                    @error('category')
+                                    <label for="blog_category_id" class="form-label">Category</label>
+                                    <select class="form-select @error('blog_category_id') is-invalid @enderror" 
+                                            id="blog_category_id" name="blog_category_id">
+                                        <option value="">-- Select Category --</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}" {{ old('blog_category_id', $blog->blog_category_id) == $category->id ? 'selected' : '' }}>
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('blog_category_id')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>

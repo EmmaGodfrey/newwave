@@ -119,7 +119,7 @@
                         <h5 class="mt-3">Drop images here or click to browse</h5>
                         <p class="text-muted">Upload multiple images at once (JPG, PNG, GIF - Max 2MB each)</p>
                         <input type="file" class="d-none" id="imageInput" name="images[]" accept="image/*" multiple>
-                        <button type="button" class="btn btn-primary mt-2" onclick="document.getElementById('imageInput').click()">
+                        <button type="button" class="btn btn-primary mt-2" onclick="selectImages(event)">
                             <i class="bx bx-upload"></i> Select Images
                         </button>
                     </div>
@@ -244,7 +244,11 @@ const imageInput = document.getElementById('imageInput');
 const previewArea = document.getElementById('previewArea');
 const uploadControls = document.getElementById('uploadControls');
 
-uploadArea.addEventListener('click', () => {
+uploadArea.addEventListener('click', (e) => {
+    // Don't trigger if clicking on a button or if we already have files selected
+    if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+        return;
+    }
     imageInput.click();
 });
 
@@ -302,6 +306,11 @@ function resetUpload() {
     previewArea.innerHTML = '';
     previewArea.style.display = 'none';
     uploadControls.style.display = 'none';
+}
+
+function selectImages(e) {
+    e.stopPropagation();
+    document.getElementById('imageInput').click();
 }
 
 function confirmDelete(imageId, imageName) {

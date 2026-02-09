@@ -9,15 +9,15 @@
     @slot('title') Edit Service @endslot
 @endcomponent
 
+<form action="{{ route('admin.service-pricing.update', $servicePricing) }}" method="POST">
+    @csrf
+    @method('PUT')
+
 <div class="row">
     <div class="col-lg-8">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Service Information</h4>
-
-                <form action="{{ route('admin.service-pricing.update', $servicePricing) }}" method="POST">
-                    @csrf
-                    @method('PUT')
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Service Name <span class="text-danger">*</span></label>
@@ -115,11 +115,6 @@
                         </button>
                     </div>
 
-                    <div class="mt-4">
-                        <button type="submit" class="btn btn-primary">Update Service</button>
-                        <a href="{{ route('admin.service-pricing.index') }}" class="btn btn-secondary">Cancel</a>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -171,6 +166,15 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Update Service</button>
+        <a href="{{ route('admin.service-pricing.index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</div>
+
+</form>
 
 @endsection
 

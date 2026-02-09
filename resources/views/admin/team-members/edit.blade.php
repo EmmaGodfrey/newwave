@@ -9,15 +9,15 @@
     @slot('title') Edit Member @endslot
 @endcomponent
 
+<form action="{{ route('admin.team-members.update', $teamMember) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+    
 <div class="row">
     <div class="col-lg-8">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Team Member Information</h4>
-
-                <form action="{{ route('admin.team-members.update', $teamMember) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
@@ -95,11 +95,6 @@
                         </button>
                     </div>
 
-                    <div class="mt-4">
-                        <button type="submit" class="btn btn-primary">Update Team Member</button>
-                        <a href="{{ route('admin.team-members.index') }}" class="btn btn-secondary">Cancel</a>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -117,7 +112,7 @@
                         <img src="{{ asset('storage/' . $teamMember->image) }}" 
                              alt="{{ $teamMember->name }}" 
                              class="img-thumbnail" 
-                             style="max-width: 200px;">
+                             style="width: 200px; height: 200px; object-fit: cover;">
                         <p class="text-muted small mt-1">Current image</p>
                     </div>
                     @endif
@@ -130,7 +125,7 @@
                     <small class="text-muted">Leave empty to keep current image. Recommended: Square image, min 400x400px</small>
                     
                     <div id="image-preview" class="mt-3" style="display: none;">
-                        <img src="" alt="Preview" class="img-thumbnail" style="max-width: 100%;">
+                        <img src="" alt="Preview" class="img-thumbnail" style="width: 200px; height: 200px; object-fit: cover;">
                     </div>
                 </div>
 
@@ -155,6 +150,15 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Update Team Member</button>
+        <a href="{{ route('admin.team-members.index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</div>
+
+</form>
 
 @endsection
 

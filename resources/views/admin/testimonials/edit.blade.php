@@ -14,7 +14,7 @@
     @method('PUT')
 
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Testimonial Information</h4>
@@ -54,72 +54,39 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="col-lg-4">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title mb-4">Image & Settings</h4>
-
-                <div class="mb-3">
-                    <label for="client_image" class="form-label">Client Image</label>
-                    
-                    @if($testimonial->client_image)
-                    <div class="mb-2">
-                        <img src="{{ asset('storage/' . $testimonial->client_image) }}" 
-                             alt="{{ $testimonial->client_name }}" 
-                             class="img-thumbnail" 
-                             style="max-width: 200px;">
-                        <p class="text-muted small mt-1">Current image</p>
+                    <div class="mb-3">
+                        <label for="rating" class="form-label">Rating <span class="text-danger">*</span></label>
+                        <select class="form-select @error('rating') is-invalid @enderror" id="rating" name="rating" required>
+                            <option value="5" {{ old('rating', $testimonial->rating) == 5 ? 'selected' : '' }}>5 Stars</option>
+                            <option value="4" {{ old('rating', $testimonial->rating) == 4 ? 'selected' : '' }}>4 Stars</option>
+                            <option value="3" {{ old('rating', $testimonial->rating) == 3 ? 'selected' : '' }}>3 Stars</option>
+                            <option value="2" {{ old('rating', $testimonial->rating) == 2 ? 'selected' : '' }}>2 Stars</option>
+                            <option value="1" {{ old('rating', $testimonial->rating) == 1 ? 'selected' : '' }}>1 Star</option>
+                        </select>
+                        @error('rating')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                    @endif
-                    
-                    <input type="file" class="form-control @error('client_image') is-invalid @enderror" 
-                           id="client_image" name="client_image" accept="image/*">
-                    @error('client_image')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                    <small class="text-muted">Leave empty to keep current image. Recommended: Square image, min 200x200px</small>
-                    
-                    <div id="image-preview" class="mt-3" style="display: none;">
-                        <img src="" alt="Preview" class="img-thumbnail" style="max-width: 100%;">
+
+                    <div class="mb-3">
+                        <label for="order" class="form-label">Display Order</label>
+                        <input type="number" class="form-control @error('order') is-invalid @enderror" 
+                               id="order" name="order" value="{{ old('order', $testimonial->order) }}" min="0">
+                        @error('order')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                        <small class="text-muted">Lower numbers appear first</small>
                     </div>
-                </div>
 
-                <div class="mb-3">
-                    <label for="rating" class="form-label">Rating <span class="text-danger">*</span></label>
-                    <select class="form-select @error('rating') is-invalid @enderror" id="rating" name="rating" required>
-                        <option value="5" {{ old('rating', $testimonial->rating) == 5 ? 'selected' : '' }}>5 Stars</option>
-                        <option value="4" {{ old('rating', $testimonial->rating) == 4 ? 'selected' : '' }}>4 Stars</option>
-                        <option value="3" {{ old('rating', $testimonial->rating) == 3 ? 'selected' : '' }}>3 Stars</option>
-                        <option value="2" {{ old('rating', $testimonial->rating) == 2 ? 'selected' : '' }}>2 Stars</option>
-                        <option value="1" {{ old('rating', $testimonial->rating) == 1 ? 'selected' : '' }}>1 Star</option>
-                    </select>
-                    @error('rating')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="order" class="form-label">Display Order</label>
-                    <input type="number" class="form-control @error('order') is-invalid @enderror" 
-                           id="order" name="order" value="{{ old('order', $testimonial->order) }}" min="0">
-                    @error('order')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                    <small class="text-muted">Lower numbers appear first</small>
-                </div>
-
-                <div class="mb-3">
-                    <div class="form-check form-switch">
-                        <input type="hidden" name="is_active" value="0">
-                        <input type="checkbox" class="form-check-input" id="is_active" 
-                               name="is_active" value="1" {{ old('is_active', $testimonial->is_active) ? 'checked' : '' }}>
-                        <label class="form-check-label" for="is_active">Active</label>
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input type="hidden" name="is_active" value="0">
+                            <input type="checkbox" class="form-check-input" id="is_active" 
+                                   name="is_active" value="1" {{ old('is_active', $testimonial->is_active) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="is_active">Active</label>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -137,19 +104,4 @@
 @endsection
 
 @section('script')
-<script>
-    // Image preview
-    document.getElementById('client_image').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const preview = document.getElementById('image-preview');
-                preview.querySelector('img').src = e.target.result;
-                preview.style.display = 'block';
-            }
-            reader.readAsDataURL(file);
-        }
-    });
-</script>
 @endsection

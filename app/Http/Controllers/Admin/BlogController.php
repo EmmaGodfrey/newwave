@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\BlogDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -24,7 +25,8 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('admin.blogs.create');
+        $categories = BlogCategory::where('is_active', true)->orderBy('sort_order')->get();
+        return view('admin.blogs.create', compact('categories'));
     }
 
     /**
@@ -38,7 +40,7 @@ class BlogController extends Controller
             'excerpt' => 'nullable|string',
             'content' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'category' => 'nullable|string|max:255',
+            'blog_category_id' => 'nullable|exists:blog_categories,id',
             'author' => 'nullable|string|max:255',
             'status' => 'required|in:draft,published',
             'published_at' => 'nullable|date',
@@ -77,7 +79,8 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        return view('admin.blogs.edit', compact('blog'));
+        $categories = BlogCategory::where('is_active', true)->orderBy('sort_order')->get();
+        return view('admin.blogs.edit', compact('blog', 'categories'));
     }
 
     /**
@@ -91,7 +94,7 @@ class BlogController extends Controller
             'excerpt' => 'nullable|string',
             'content' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'category' => 'nullable|string|max:255',
+            'blog_category_id' => 'nullable|exists:blog_categories,id',
             'author' => 'nullable|string|max:255',
             'status' => 'required|in:draft,published',
             'published_at' => 'nullable|date',
