@@ -73,7 +73,6 @@ class PortfolioCategoryController extends Controller
     {
         $category->delete();
         
-        return redirect()->route('admin.portfolio.categories.index')
-            ->with('success', 'Category deleted successfully.');
+        return response()->json(['success' => true, 'message' => 'Category deleted successfully.']);
     }
 }

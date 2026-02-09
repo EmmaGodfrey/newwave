@@ -17,9 +17,9 @@
                 @if($faqs->count() > 0)
                 <ul class="accordion-box clearfix">
                     @foreach($faqs as $index => $faq)
-                    <li class="accordion block {{ $index === 0 ? 'active-block' : '' }}">
+                    <li class="accordion block">
                         <div class="acc-btn"><span class="count">{{ $index + 1 }}.</span> {{ $faq->question }}</div>
-                        <div class="acc-content {{ $index === 0 ? 'current' : '' }}">
+                        <div class="acc-content">
                             <div class="content">
                                 <div class="text">{!! nl2br(e($faq->answer)) !!}</div>
                             </div>

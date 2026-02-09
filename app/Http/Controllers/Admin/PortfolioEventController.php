@@ -155,7 +155,6 @@ class PortfolioEventController extends Controller
         
         $event->delete();
         
-        return redirect()->route('admin.portfolio.events.index')
-            ->with('success', 'Event deleted successfully.');
+        return response()->json(['success' => true, 'message' => 'Event deleted successfully.']);
     }
 }

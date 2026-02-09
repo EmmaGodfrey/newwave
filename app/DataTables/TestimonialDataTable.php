@@ -47,17 +47,8 @@ class TestimonialDataTable extends DataTable
             ->setTableId('testimonials-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->dom('Blfrtip')
             ->orderBy(1)
-            ->responsive(true)
-            ->autoWidth(false)
-            ->serverSide(true)
-            ->processing(true)
-            ->parameters([
-                'columnDefs' => [
-                    ['targets' => '_all', 'defaultContent' => ''],
-                ],
-            ]);
+            ->selectStyleSingle();
     }
 
     public function getColumns(): array

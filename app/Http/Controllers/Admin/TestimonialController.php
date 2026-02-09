@@ -71,6 +71,6 @@ class TestimonialController extends Controller
     {
         $testimonial->delete();
 
-        return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial deleted successfully.');
+        return response()->json(['success' => true, 'message' => 'Testimonial deleted successfully.']);
     }
 }

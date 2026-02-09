@@ -79,6 +79,6 @@ class ServicePricingController extends Controller
     {
         $servicePricing->delete();
 
-        return redirect()->route('admin.service-pricing.index')->with('success', 'Service pricing deleted successfully.');
+        return response()->json(['success' => true, 'message' => 'Service pricing deleted successfully.']);
     }
 }

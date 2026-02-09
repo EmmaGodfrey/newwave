@@ -87,6 +87,6 @@ class TeamMemberController extends Controller
         }
         $teamMember->delete();
 
-        return redirect()->route('admin.team-members.index')->with('success', 'Team member deleted successfully.');
+        return response()->json(['success' => true, 'message' => 'Team member deleted successfully.']);
     }
 }
