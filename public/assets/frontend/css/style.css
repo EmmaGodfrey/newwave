@@ -2159,6 +2159,10 @@ input[type="checkbox"] {
     -webkit-transition: all .5s;
     transition: all .5s;
     border: 2px solid rgba(255, 255, 255, 0.03);
+    min-height: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
 }
 .services .item:hover {
     border: 2px solid #222222;
@@ -2187,6 +2191,13 @@ input[type="checkbox"] {
 .services .item p {
     color: #777;
     margin-bottom: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5;
+    max-height: 96px;
 }
 .services .item:hover h5 {
     color: #FFF;
@@ -2244,6 +2255,18 @@ input[type="checkbox"] {
     color: #777;
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+
+/* Center owl carousel items when not looping */
+.owl-carousel.center-items .owl-stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.owl-carousel.center-items .owl-stage-outer {
+    display: flex;
+    justify-content: center;
 }
 
 

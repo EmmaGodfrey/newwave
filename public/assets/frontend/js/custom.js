@@ -205,7 +205,41 @@
     /*----------------------------------------------------
       9. Team owlCarousel
     ----------------------------------------------------*/
-    $('.team .owl-carousel').owlCarousel({
+    // Check if this is the about page team carousel
+    var aboutTeamCarousel = $('#about-team-carousel');
+    if (aboutTeamCarousel.length) {
+        var teamCount = parseInt(aboutTeamCarousel.data('team-count')) || 0;
+        var shouldLoop = teamCount > 2;
+        aboutTeamCarousel.owlCarousel({
+            loop: shouldLoop
+            , margin: 30
+            , dots: false
+            , mouseDrag: true
+            , autoplay: false
+            , nav: false
+            , navText: ["<span class='lnr ti-angle-left'></span>", "<span class='lnr ti-angle-right'></span>"]
+            , responsiveClass: true
+            , responsive: {
+                0: {
+                    items: 1
+                    , dots: true
+                }
+                , 600: {
+                    items: 2
+                }
+                , 1000: {
+                    items: 4
+                }
+            }
+        });
+        // Add class to center items when not looping
+        if (!shouldLoop) {
+            aboutTeamCarousel.addClass('center-items');
+        }
+    }
+    
+    // Initialize other team carousels with default loop behavior
+    $('.team .owl-carousel').not('#about-team-carousel').owlCarousel({
         loop: true
         , margin: 30
         , dots: false

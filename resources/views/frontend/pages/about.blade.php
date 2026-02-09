@@ -73,7 +73,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="owl-carousel owl-theme">
+                <div class="owl-carousel owl-theme" id="about-team-carousel" data-team-count="{{ count($teamMembers) }}">
                     @forelse($teamMembers as $member)
                     <div class="item">
                         <div class="img"><a href="#"><img src="{{ asset('storage/' . $member->image) }}" alt="{{ $member->name }}"
