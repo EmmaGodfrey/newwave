@@ -21,3 +21,4 @@
  <script src="{{ URL::asset('/assets/js/app.min.js')}}"></script>
  
  @yield('script-bottom')
+<script src="{{ asset('assets/js/image-wall.js') }}" defer></script>

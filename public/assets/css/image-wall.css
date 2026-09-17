@@ -1,0 +1,27 @@
+.image-wall { --image-gap: 18px; position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--image-gap); width: 100%; }
+.image-wall.is-masonry { display: block; }
+.image-wall > .image-tile { flex: 1 1 260px; min-width: 0; max-width: 100%; margin: 0; padding: 0; }
+.image-wall.is-masonry > .image-tile { position: absolute; top: 0; left: 0; }
+.image-wall > .image-tile[hidden] { display: none !important; }
+.image-tile img, .image-wall .image-card img { display: block; width: 100%; height: auto !important; max-height: none; object-fit: contain; }
+.image-tile figure { margin: 0; }
+.image-tile > a, .image-tile .image-link { display: block; color: inherit; text-decoration: none; }
+.image-tile .image-frame { overflow: hidden; border-radius: 8px; background: #242424; }
+.image-tile .image-caption { padding: 14px 0 6px; }
+.image-tile .image-caption h3, .image-tile .image-caption h4, .image-tile .image-caption h5 { margin: 0 0 6px; color: #f3f3f3; font-size: 18px; line-height: 1.35; overflow-wrap: anywhere; }
+.image-tile .image-caption p { margin: 0; font-size: 14px; line-height: 1.5; color: #c0c0c0; }
+.image-tile .image-caption small { color: #bcbcbc; }
+.image-tile .photo-open { display: block; width: 100%; padding: 0; border: 0; background: transparent; color: inherit; cursor: zoom-in; }
+.image-tile a:focus-visible, .image-tile button:focus-visible { outline: 3px solid var(--nw-primary, #f5ff00); outline-offset: 4px; }
+.image-filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0 0 32px; }
+.image-filters button { border: 1px solid #686868; padding: 9px 18px; border-radius: 24px; background: transparent; color: #eee; font: inherit; cursor: pointer; }
+.image-filters button[aria-pressed="true"] { border-color: var(--nw-primary, #f5ff00); background: var(--nw-primary, #f5ff00); color: var(--nw-on-primary, #141600); }
+.image-filters button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.event-meta { color: #c7c7c7; }
+.event-meta span { display: inline-block; margin: 0 12px 8px; }
+.event-back { display: inline-block; color: #dedede; margin-bottom: 30px; }
+.event-back:hover { color: var(--nw-primary, #f5ff00); }
+.photo-modal .modal-content { background: #181a1d; color: #f5f5f5; border: 1px solid #575757; }
+.photo-modal .modal-header { border-color: #575757; }
+.photo-modal .modal-title { color: #fff; }
+.photo-modal img { display: block; max-width: 100%; max-height: 80vh; width: auto; height: auto; margin: auto; object-fit: contain; }

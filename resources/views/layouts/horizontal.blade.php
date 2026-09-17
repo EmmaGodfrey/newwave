@@ -2,7 +2,7 @@
     <div class="navbar-header">
         <div class="d-flex">
             <div class="navbar-brand-box">
-                <a href="{{url('index')}}" class="logo logo-dark">
+                <a href="{{route('admin.dashboard')}}" class="logo logo-dark">
                     <span class="logo-sm">
                         <img src="{{ URL::asset('/assets/frontend/images/newwavelogo.png') }}" alt="NewWave"
                             height="22">

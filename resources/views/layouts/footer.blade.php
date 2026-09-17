@@ -6,7 +6,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="text-sm-end d-none d-sm-block">
-                    Developed by <a href="https://egcodes.com" target="_blank" class="text-reset">EGCodes</a>
+                    Developed by <span class="text-reset">EGlabs</span>
                 </div>
             </div>
         </div>

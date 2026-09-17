@@ -51,7 +51,7 @@ class UserDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Blfrtip')
-            ->orderBy(3, 'desc')
+            ->orderBy(2, 'desc')
             ->responsive(true)
             ->autoWidth(false)
             ->serverSide(true)

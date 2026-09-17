@@ -42,7 +42,7 @@ class PortfolioCategoryController extends Controller
     public function show(PortfolioCategory $category)
     {
         $category->load('events');
-        return view('admin.portfolio.categories.show', compact('category'));
+        return redirect()->route('admin.portfolio.categories.edit', $category);
     }
 
     public function edit(PortfolioCategory $category)

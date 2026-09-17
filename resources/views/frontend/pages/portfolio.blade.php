@@ -1,103 +1,31 @@
-﻿@extends('frontend.layouts.app')
-
+@extends('frontend.layouts.app')
 @section('content')
-<!-- Portfolio -->
 <section class="section-padding">
     <div class="container">
-        <div class="row justify-content-center mb-45">
-            <div class="col-md-12 text-center">
-                <h6 class="wow" data-splitting>Time stands still in every shot</h6>
-                <h1 class="wow" data-splitting>Portfolio</h1>
-            </div>
+        <div class="text-center mb-45">
+            <h6>Speed, culture, and community</h6>
+            <h1>Portfolio</h1>
         </div>
-        @if($categories->count() > 0)
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <ul class="gallery-filter">
-                        <li class="active" data-filter="*">All</li>
-                        @foreach($categories as $category)
-                            <li data-filter=".{{ $category->slug }}">{{ $category->name }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+        @if($categories->contains(fn ($category) => $category->activeEvents->isNotEmpty()))
+            <div class="image-filters" data-image-filters="portfolio-wall" aria-label="Filter portfolio">
+                <button type="button" data-filter="*" aria-pressed="true">All</button>
+                @foreach($categories as $category)
+                    @if($category->activeEvents->isNotEmpty())
+                        <button type="button" data-filter="{{ $category->id }}" aria-pressed="false">{{ $category->name }}</button>
+                    @endif
+                @endforeach
             </div>
-            <div class="row gallery-items">
+            <div id="portfolio-wall" class="image-wall" data-image-wall>
                 @foreach($categories as $category)
                     @foreach($category->activeEvents as $event)
-                        <div class="col-lg-4 col-md-6 single-item {{ $category->slug }} mb-25">
-                            <a href="{{ route('portfolio.event', $event->slug) }}" title="{{ $event->title }}" class="gallery-masonry-item-img-link">
-                                <div class="gallery-box">
-                                    <div class="gallery-img img-grayscale"> 
-                                        @if($event->featured_image)
-                                            <img src="{{ asset('storage/' . $event->featured_image) }}" class="img-fluid mx-auto d-block" alt="{{ $event->title }}"> 
-                                        @elseif($event->featuredImage)
-                                            <img src="{{ asset('storage/' . $event->featuredImage->image_path) }}" class="img-fluid mx-auto d-block" alt="{{ $event->title }}">
-                                        @else
-                                            <img src="{{ asset('assets/frontend/images/portfolio/default.jpg') }}" class="img-fluid mx-auto d-block" alt="{{ $event->title }}">
-                                        @endif
-                                    </div>
-                                    <div class="gallery-detail">
-                                        <h4>{{ $event->title }}</h4>
-                                        <p>{{ Str::limit($event->description ?: $category->description, 60) }}</p>
-                                        @if($event->location)
-                                            <small class="text-muted">{{ $event->location }}</small>
-                                        @endif
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                        @include('frontend.partials.event-tile', ['event' => $event])
                     @endforeach
                 @endforeach
             </div>
         @else
-            <div class="row">
-                <div class="col-md-12 text-center mt-60 mb-60">
-                    <p class="wow fadeInUp" style="font-size: 18px; color: #777;">No portfolio items available at the moment. Check back soon!</p>
-                </div>
-            </div>
+            <p class="text-center">New work will be shared here soon.</p>
         @endif
     </div>
 </section>
-<!-- Testiominals -->
-<section id="testimonials" class="testimonials">
-    <div class="background bg-img bg-imgfixed section-padding" data-overlay-dark="5"
-        data-background="images/slider/01.jpg">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Work together -->
-                <div class="col-md-5 mb-30">
-                    <h4 class="wow" data-splitting>Let's capture the perfect shots together.</h4>
-                    <div class="btn-wrap mt-30 text-left wow fadeInUp" data-wow-delay=".6s">
-                        <div class="btn-link"><a href="mailto:info@newwavemotorsport.com">info@newwavemotorsport.com</a><span
-                                class="btn-block color3 animation-bounce"></span></div>
-                    </div>
-                </div>
-                <!-- Testiominals -->
-                <div class="col-md-5 offset-md-2">
-                    <div class="testimonials-box">
-                        <h5>What Are Clients Saying?</h5>
-                        <div class="owl-carousel owl-theme">
-                            @foreach($testimonials as $testimonial)
-                                <div class="item">
-                                    <p>{{ $testimonial->testimonial }}</p> 
-                                    <span class="quote"><img src="{{ asset('assets/frontend/images/quot.png') }}" alt="" loading="lazy"></span>
-                                    <div class="info">
-                                        <div class="author-img">
-                                            <i class="ti-user" style="font-size: 40px; color: #aa8453;"></i>
-                                        </div>
-                                        <div class="cont">
-                                            <h6>{{ $testimonial->client_name }}</h6> 
-                                            <span>{{ $testimonial->client_position ?? 'Customer' }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@include('frontend.partials.testimonials')
 @endsection
-

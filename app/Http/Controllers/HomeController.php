@@ -38,10 +38,9 @@ class HomeController extends Controller
     public function root()
     {
         $testimonials = Testimonial::active()->ordered()->take(2)->get();
-        $pricing = ServicePricing::active()->ordered()->take(3)->get();
         $services = ServicePricing::active()->ordered()->get();
         $contactSettings = ContactSetting::first();
-        return view('frontend.pages.home', compact('testimonials', 'pricing', 'services', 'contactSettings'));
+        return view('frontend.pages.home', compact('testimonials', 'services', 'contactSettings'));
     }
 
     public function about()
@@ -72,9 +71,7 @@ class HomeController extends Controller
 
     public function pricing()
     {
-        $pricing = ServicePricing::active()->ordered()->get();
-        $testimonials = Testimonial::active()->ordered()->take(2)->get();
-        return view('frontend.pages.price', compact('pricing', 'testimonials'));
+        return view('frontend.pages.price');
     }
 
     public function team()

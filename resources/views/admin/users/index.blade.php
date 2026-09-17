@@ -206,7 +206,7 @@ $(document).ready(function() {
                     if (xhr.status === 419) {
                         showToast('danger', 'Session expired. Please refresh the page and try again.');
                     } else {
-                        showToast('danger', 'Error deleting user');
+                        showToast('danger', xhr.responseJSON?.message || 'Error deleting user');
                     }
                 },
                 complete: function() {
@@ -252,9 +252,9 @@ $(document).ready(function() {
             },
             error: function(xhr) {
                 if (xhr.status === 422) {
-                    let errors = xhr.responseJSON.errors;
+                    let errors = xhr.responseJSON.errors || {};
                     displayValidationErrors(form, errors);
-                    showToast('danger', 'Please fix the validation errors.');
+                    showToast('danger', xhr.responseJSON.message || 'Please fix the validation errors.');
                 } else {
                     showToast('danger', 'Error processing request');
                 }

@@ -1,36 +1,34 @@
 <footer class="footer-section">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-md-12"><a href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/newwavelogo.png') }}" alt="NewWave"></a></div>
-            <div class="col-lg-3 col-md-12">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 mb-30">
+                <a href="{{ route('home') }}"><img src="{{ asset('assets/frontend/images/newwavelogo.png') }}" alt="NewWave Motorsport"></a>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-30">
                 <h5>Get in touch</h5>
-                <p><a href="mailto:{{ $globalContactSettings->email ?? 'info@newwavemotorsport.com' }}" style="color: inherit; text-decoration: none;">{{ $globalContactSettings->email ?? 'info@newwavemotorsport.com' }}</a>
-                    <br><a href="tel:{{ $globalContactSettings->phone ?? '+260XXXXXXXXX' }}" style="color: inherit; text-decoration: none;">{{ $globalContactSettings->phone ?? '+260 XXX XXX XXX' }}</a>
-                </p>
+                <p><a href="mailto:{{ $globalContactSettings->email ?? 'info@newwavemotorsport.com' }}">{{ $globalContactSettings->email ?? 'info@newwavemotorsport.com' }}</a></p>
+                @if(filled($globalContactSettings?->phone) && !str_contains(strtolower($globalContactSettings->phone), 'x'))
+                    <p><a href="tel:{{ preg_replace('/[^+0-9]/', '', $globalContactSettings->phone) }}">{{ $globalContactSettings->phone }}</a></p>
+                @endif
+                @if(filled($globalContactSettings?->address))
+                    <p>{{ $globalContactSettings->address }}</p>
+                @endif
             </div>
-            <div class="col-lg-3 col-md-12">
-                <h5>Location</h5>
-                <p>{{ $globalContactSettings->address ?? 'Lusaka — Zambia' }}
-                    <br>
-                </p>
-            </div>
-            <div class="col-lg-3 col-md-12">
-                <ul class="footer-social-link">
-                    <li><a href="https://duruthemes.com/demo/html/gloom/" target="_blank"><i
-                                class="fa-brands fa-instagram"></i></a></li>
-                    <li><a href="https://duruthemes.com/demo/html/gloom/" target="_blank"><i
-                                class="fa-brands fa-x-twitter"></i></a></li>
-                    <li><a href="https://duruthemes.com/demo/html/gloom/" target="_blank"><i
-                                class="fa-brands fa-youtube"></i></a></li>
-                    <li><a href="https://duruthemes.com/demo/html/gloom/" target="_blank"><i
-                                class="fa-brands fa-tiktok"></i></a></li>
-                </ul>
+            <div class="col-lg-4 col-md-6 mb-30">
+                <h5>Explore</h5>
+                <button type="button" id="analytics-settings" class="analytics-settings" hidden>Cookie settings</button>
+                <p><a href="{{ route('privacy') }}">Privacy policy</a> &middot; <a href="{{ route('terms') }}">Terms</a></p>
+                <p><a href="{{ route('cookies') }}">Cookie policy</a> &middot; <a href="{{ route('refunds') }}">Refund policy</a></p>
+                <p><a href="{{ route('portfolio') }}">Portfolio</a> &middot; <a href="{{ route('contact') }}">Contact</a></p>
+                @if(\App\Models\Faq::active()->exists())
+                    <p><a href="{{ route('faq') }}">FAQs</a></p>
+                @endif
+                <p><a href="{{ auth()->user()?->is_admin ? route('admin.dashboard') : route('login') }}">{{ auth()->user()?->is_admin ? 'Admin dashboard' : 'Admin login' }}</a></p>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-md-10 text-center">
-                <p class="mb-0 copyright">© 2026 NewWave Motorsport. All rights reserved.</p>
-            </div>
+        <div class="footer-bottom">
+            <p class="mb-0 copyright">&copy; {{ date('Y') }} NewWave Motorsport. All rights reserved.</p>
+            <p class="developer-credit">Developed by <strong>EGlabs</strong></p>
         </div>
     </div>
 </footer>

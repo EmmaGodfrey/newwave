@@ -1,0 +1,29 @@
+/* Dashboard components retain their semantics while sharing the NewWave palette. */
+.nw-admin {
+    --bs-primary: var(--nw-primary); --bs-primary-rgb: var(--nw-primary-rgb);
+    --bs-body-bg: var(--nw-bg); --bs-body-color: var(--nw-text);
+    --bs-heading-color: var(--nw-heading); --bs-secondary-color: var(--nw-muted);
+    --bs-border-color: var(--nw-border); --bs-link-color: var(--nw-primary);
+    --bs-link-hover-color: var(--nw-primary-hover);
+    background: var(--nw-bg); color: var(--nw-text); color-scheme: dark;
+}
+.nw-admin .card, .nw-admin .modal-content, .nw-admin .dropdown-menu { background: var(--nw-surface); border-color: var(--nw-border); color: var(--nw-text); }
+.nw-admin .card-header, .nw-admin .modal-header, .nw-admin .modal-footer { background: transparent; border-color: var(--nw-border); }
+.nw-admin :is(h1,h2,h3,h4,h5,h6,.form-label,.card-title) { color: var(--nw-heading); }
+.nw-admin .text-muted, .nw-admin .form-text { color: var(--nw-muted) !important; }
+.nw-admin .btn-primary { --bs-btn-bg: var(--nw-primary); --bs-btn-border-color: var(--nw-primary); --bs-btn-color: var(--nw-on-primary); --bs-btn-hover-bg: var(--nw-primary-hover); --bs-btn-hover-border-color: var(--nw-primary-hover); --bs-btn-hover-color: var(--nw-on-primary); --bs-btn-active-bg: var(--nw-primary-hover); --bs-btn-active-color: var(--nw-on-primary); background: var(--nw-primary); border-color: var(--nw-primary); color: var(--nw-on-primary); }
+.nw-admin .btn-primary:hover { background: var(--nw-primary-hover); border-color: var(--nw-primary-hover); }
+.nw-admin .btn-outline-primary { color: var(--nw-primary); border-color: var(--nw-primary); }
+.nw-admin .btn-outline-primary:hover { background: var(--nw-primary); color: var(--nw-on-primary); }
+.nw-admin .text-primary { color: var(--nw-primary) !important; }
+.nw-admin .form-control, .nw-admin .form-select { background-color: #111315; color: var(--nw-heading); border-color: #616a73; }
+.nw-admin .form-control:focus, .nw-admin .form-select:focus { border-color: var(--nw-primary); box-shadow: 0 0 0 3px rgba(var(--nw-primary-rgb),.18); }
+.nw-admin .form-control::placeholder { color: #abb3bc; }
+.nw-admin .form-check-input:checked { background-color: #b4bb00; border-color: var(--nw-primary); }
+.nw-admin .table { --bs-table-bg: var(--nw-surface); --bs-table-color: var(--nw-text); --bs-table-border-color: var(--nw-border); --bs-table-hover-color: var(--nw-heading); --bs-table-hover-bg: #292d31; }
+.nw-admin .topnav, .nw-admin #page-topbar, .nw-admin .footer { background: #111315; border-color: var(--nw-border); color: var(--nw-muted); }
+.nw-admin .topnav .navbar-nav .nav-link, .nw-admin .dropdown-item { color: var(--nw-text); }
+.nw-admin .topnav .navbar-nav .nav-link:is(:hover,.active), .nw-admin .dropdown-item:hover { color: var(--nw-primary); background-color: #25292d; }
+.nw-admin .image-info, .nw-admin .upload-area { background: var(--nw-surface-raised); color: var(--nw-text); }
+.nw-admin :is(a,button):focus-visible { outline: 2px solid var(--nw-primary); outline-offset: 3px; }
+.nw-admin .page-item.active .page-link { background-color: var(--nw-primary); border-color: var(--nw-primary); color: var(--nw-on-primary); }

@@ -31,6 +31,13 @@
                     <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
                 </div>
             </div>
+            <div class="col-12 mb-3">
+                <input type="hidden" name="is_admin" value="0">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="is_admin" name="is_admin" value="1" @checked($user->is_admin)>
+                    <label class="form-check-label" for="is_admin">Allow admin access</label>
+                </div>
+            </div>
         </div>
     </div>
     <div class="modal-footer">

@@ -1,49 +1,12 @@
-@extends('layouts.master-without-nav')
-@section('title')
-    Verify Your Email Address
-@endsection
+@extends('layouts.auth')
+@section('title', 'Verify your email')
+@section('intro', 'Check your inbox for a verification link before continuing.')
 @section('content')
-    <div class="account-pages my-5  pt-sm-5">
-        <div class="container">
-            <div class="row justify-content-center">
-
-                <div class="col-md-8 col-lg-6 col-xl-5">
-                    <div>
-                        <a href="{{ url('index') }}" class="mb-5 d-block auth-logo">
-                            <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="22"
-                                class="logo logo-dark">
-                            <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="22"
-                                class="logo logo-light">
-                        </a>
-                        <div class="card">
-                            <div class="card-header">{{ __('Verify Your Email Address') }}</div>
-
-                            <div class="card-body">
-                                @if (session('resent'))
-                                    <div class="alert alert-success" role="alert">
-                                        {{ __('A fresh verification link has been sent to your email address.') }}
-                                    </div>
-                                @endif
-
-                                {{ __('Before proceeding, please check your email for a verification link.') }}
-                                {{ __('If you did not receive the email') }},
-                                <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                                    @csrf
-                                    <button type="submit"
-                                        class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                                </form>
-                            </div>
-                        </div>
-                        <div class="mt-5 text-center">
-                            <p>© <script>
-                                    document.write(new Date().getFullYear())
-
-                                </script> Minible. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end container -->
-        </div>
-    </div>
+@if(session('resent'))<div class="auth-status" role="status">A new verification link has been sent.</div>@endif
+@if(Route::has('verification.resend'))
+<form method="POST" action="{{ route('verification.resend') }}">
+    @csrf
+    <button class="auth-submit" type="submit">Resend verification email</button>
+</form>
+@endif
 @endsection

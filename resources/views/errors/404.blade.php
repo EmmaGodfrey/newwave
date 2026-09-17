@@ -20,10 +20,10 @@
                             </div>
                         </div>
                         <h4 class="text-uppercase mt-4">Sorry, page not found</h4>
-                        <p class="text-muted">It will be as simple as Occidental in fact, it will be Occidental</p>
+                        <p class="text-muted">The page you requested could not be found.</p>
                         <div class="mt-5">
-                            <a class="btn btn-primary waves-effect waves-light" href="{{ url('index') }}">Back to
-                                Dashboard</a>
+                            <a class="btn btn-primary waves-effect waves-light" href="{{ route('home') }}">Back to
+                                Home</a>
                         </div>
                     </div>
 

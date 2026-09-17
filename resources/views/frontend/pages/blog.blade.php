@@ -22,7 +22,7 @@
                                         @if($blog->image)
                                             <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" loading="lazy" style="max-height: 450px; width: 100%; object-fit: cover;">
                                         @else
-                                            <img src="{{ asset('assets/frontend/images/slider/03.jpg') }}" alt="{{ $blog->title }}" loading="lazy" style="max-height: 450px; width: 100%; object-fit: cover;">
+                                            <img src="{{ asset('assets/frontend/images/car_pics/track-action-01.jpg') }}" alt="{{ $blog->title }}" loading="lazy" style="max-height: 450px; width: 100%; object-fit: cover;">
                                         @endif
                                     </a>
                                     <div class="date">
@@ -67,19 +67,19 @@
                                 @if ($blogs->onFirstPage())
                                     <li class="disabled"><span><i class="ti-angle-left"></i></span></li>
                                 @else
-                                    <li><a href="{{ $blogs->previousPageUrl() }}"><i class="ti-angle-left"></i></a></li>
+                                    <li><a href="{{ $blogs->previousPageUrl() }}" aria-label="Previous page"><i class="ti-angle-left"></i></a></li>
                                 @endif
 
                                 @foreach ($blogs->getUrlRange(1, $blogs->lastPage()) as $page => $url)
                                     @if ($page == $blogs->currentPage())
-                                        <li><a href="{{ $url }}" class="active">{{ $page }}</a></li>
+                                        <li><a href="{{ $url }}" class="active" aria-current="page">{{ $page }}</a></li>
                                     @else
                                         <li><a href="{{ $url }}">{{ $page }}</a></li>
                                     @endif
                                 @endforeach
 
                                 @if ($blogs->hasMorePages())
-                                    <li><a href="{{ $blogs->nextPageUrl() }}"><i class="ti-angle-right"></i></a></li>
+                                    <li><a href="{{ $blogs->nextPageUrl() }}" aria-label="Next page"><i class="ti-angle-right"></i></a></li>
                                 @else
                                     <li class="disabled"><span><i class="ti-angle-right"></i></span></li>
                                 @endif
@@ -94,8 +94,8 @@
                     <div class="col-md-12">
                         <div class="widget search">
                             <form action="{{ route('blog.search') }}" method="GET">
-                                <input type="text" name="search" placeholder="Type here ..." value="{{ request('search') }}">
-                                <button type="submit"><i class="ti-search" aria-hidden="true"></i></button>
+                                <label class="visually-hidden" for="blog-search">Search blog posts</label><input id="blog-search" type="search" name="search" placeholder="Type here ..." value="{{ request('search') }}">
+                                <button type="submit" aria-label="Search blog posts"><i class="ti-search" aria-hidden="true"></i></button>
                             </form>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                                                 @if($recentPost->image)
                                                     <img src="{{ asset('storage/' . $recentPost->image) }}" alt="{{ $recentPost->title }}" loading="lazy" style="width: 80px; height: 80px; object-fit: cover;">
                                                 @else
-                                                    <img src="{{ asset('assets/frontend/images/slider/03.jpg') }}" alt="{{ $recentPost->title }}" loading="lazy" style="width: 80px; height: 80px; object-fit: cover;">
+                                                    <img src="{{ asset('assets/frontend/images/car_pics/track-action-01.jpg') }}" alt="{{ $recentPost->title }}" loading="lazy" style="width: 80px; height: 80px; object-fit: cover;">
                                                 @endif
                                             </div>
                                             <a href="{{ route('blog.show', $recentPost->slug) }}">{{ $recentPost->title }}</a>
@@ -155,45 +155,5 @@
         </div>
     </div>
 </section>
-<!-- Testiominals -->
-<section id="testimonials" class="testimonials">
-    <div class="background bg-img bg-imgfixed section-padding" data-overlay-dark="5"
-        data-background="images/slider/01.jpg">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Work together -->
-                <div class="col-md-5 mb-30">
-                    <h4 class="wow" data-splitting>Let’s capture the perfect shots together.</h4>
-                    <div class="btn-wrap mt-30 text-left wow fadeInUp" data-wow-delay=".6s">
-                        <div class="btn-link"><a href="mailto:info@newwavemotorsport.com">info@newwavemotorsport.com</a><span
-                                class="btn-block color3 animation-bounce"></span></div>
-                    </div>
-                </div>
-                <!-- Testiominals -->
-                <div class="col-md-5 offset-md-2">
-                    <div class="testimonials-box">
-                        <h5>What Are Clients Saying?</h5>
-                        <div class="owl-carousel owl-theme">
-                            @foreach($testimonials as $testimonial)
-                                <div class="item">
-                                    <p>{{ $testimonial->testimonial }}</p> 
-                                    <span class="quote"><img src="{{ asset('assets/frontend/images/quot.png') }}" alt="" loading="lazy"></span>
-                                    <div class="info">
-                                        <div class="author-img">
-                                            <i class="ti-user" style="font-size: 40px; color: #aa8453;"></i>
-                                        </div>
-                                        <div class="cont">
-                                            <h6>{{ $testimonial->client_name }}</h6> 
-                                            <span>{{ $testimonial->client_position ?? 'Customer' }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@include('frontend.partials.testimonials')
 @endsection
