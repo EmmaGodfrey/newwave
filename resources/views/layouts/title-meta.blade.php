@@ -4,4 +4,4 @@
 <meta content="NewWave Admin Dashboard - Manage your content, portfolio, blog and team" name="description" />
 <meta content="EGlabs" name="author" />
 <!-- App favicon -->
-<link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico')}}">
+@include('layouts.favicon')

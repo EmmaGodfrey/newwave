@@ -2,7 +2,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 @include('frontend.layouts.seo')
-<link rel="icon" type="image/x-icon" href="{{ asset('assets/frontend/images/favicon.ico') }}">
+@include('layouts.favicon')
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/plugins.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}">
 

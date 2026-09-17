@@ -6,7 +6,7 @@
     <meta name="author" content="EGlabs">
     <meta name="robots" content="noindex, nofollow">
     <title>@yield('title') | NewWave Motorsport</title>
-    <link rel="icon" href="{{ asset('assets/frontend/images/favicon.ico') }}">
+    @include('layouts.favicon')
     <link rel="stylesheet" href="{{ asset('assets/css/brand-tokens.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/auth.css') }}">
 </head>
