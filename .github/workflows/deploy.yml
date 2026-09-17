@@ -88,6 +88,7 @@ jobs:
           tar --exclude=.git --exclude=.github --exclude='.env*' --exclude=node_modules \
               --exclude=storage --exclude=tests --exclude=output --exclude=.playwright-cli \
               --exclude='bootstrap/cache/*.php' --exclude=public/storage \
+              --exclude=public/assets/libs/tinymce \
               -czf "$RUNNER_TEMP/release.tar.gz" .
       - name: Configure SSH
         env:

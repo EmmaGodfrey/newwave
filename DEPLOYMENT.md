@@ -86,6 +86,11 @@ composer audit --locked --no-dev
 
 The dependency sweep upgraded the formerly reconciled lockfile to patched versions;
 Composer no longer reports the 46 advisories found in the previous lockfile.
+The legacy npm template manifest still reports nine advisories (five high), mainly
+build-tool dependencies and unused demo editors. The deployed site does not build
+or load that TinyMCE editor, and its directory is excluded from release archives.
+Updating the legacy Mix/template toolchain requires a separate asset rebuild and
+visual regression pass; no forced major editor upgrade was made in this release.
 Production debug output is disabled and HTTPS-only session cookies are enabled
 in the shared environment. Verify real SMTP delivery separately; tests use fake or
 local log transports and do not email users. See `ANALYTICS.md` for Google-side
