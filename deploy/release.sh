@@ -15,6 +15,7 @@ switched=0
 recover() {
     result=$?
     trap - EXIT
+    set +e
     if (( result != 0 )); then
         if (( switched )); then
             ln -sfn "$previous" "$base/current.next"
@@ -53,7 +54,7 @@ php8.3 artisan route:cache
 php8.3 artisan view:cache
 ln -sfn "$previous" "$base/previous.next"
 mv -Tf "$base/previous.next" "$base/previous"
-ln -s "$release" "$base/current.next"
+ln -sfn "$release" "$base/current.next"
 mv -Tf "$base/current.next" "$base/current"
 switched=1
 sudo /usr/bin/systemctl reload php8.3-fpm
