@@ -43,6 +43,9 @@ class PortfolioController extends Controller
             }])
             ->firstOrFail();
 
-        return view('frontend.pages.portfolio-category', compact('category'));
+        $categories = collect([$category]);
+        $testimonials = Testimonial::active()->ordered()->take(2)->get();
+
+        return view('frontend.pages.portfolio', compact('categories', 'testimonials'));
     }
 }

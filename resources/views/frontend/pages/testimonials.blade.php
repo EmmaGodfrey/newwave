@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="row">
-            @forelse($testimonials as $index => $testimonial)
+            @forelse(config('site.testimonials_verified') ? $testimonials : collect() as $index => $testimonial)
                 <div class="col-lg-4 col-md-12 mb-30 wow fadeInUp" data-wow-delay=".{{ $index + 1 }}s">
                     <div class="testimonials-box">
                         <div class="item">

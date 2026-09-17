@@ -15,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Authentication Routes
-Auth::routes();
+Auth::routes(['register' => false]);
+Route::redirect('/admin/login', '/login');
 
 // Frontend Routes (Public)
+foreach (['privacy' => 'privacy-policy', 'terms' => 'terms-and-conditions', 'cookies' => 'cookie-policy', 'refunds' => 'refund-policy'] as $name => $path) {
+    Route::get('/'.$path, [App\Http\Controllers\PolicyController::class, 'show'])->defaults('policy', $name)->name($name);
+}
+Route::get('/sitemap.xml', [App\Http\Controllers\SeoController::class, 'sitemap'])->name('sitemap');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('home');
 Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
 Route::get('/services', [App\Http\Controllers\HomeController::class, 'services'])->name('services');
@@ -29,19 +34,19 @@ Route::get('/blog/search', [App\Http\Controllers\BlogController::class, 'search'
 Route::get('/blog/category/{categorySlug}', [App\Http\Controllers\BlogController::class, 'category'])->name('blog.category');
 Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
 Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact');
-Route::post('/contact', [App\Http\Controllers\ContactController::class, 'submit'])->name('contact.submit');
+Route::post('/contact', [App\Http\Controllers\ContactController::class, 'submit'])->middleware('throttle:5,1')->name('contact.submit');
 Route::get('/pricing', [App\Http\Controllers\HomeController::class, 'pricing'])->name('pricing');
 Route::get('/team', [App\Http\Controllers\HomeController::class, 'team'])->name('team');
 Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faq'])->name('faq');
 Route::get('/testimonials', [App\Http\Controllers\HomeController::class, 'testimonials'])->name('testimonials');
 
 // Admin Routes
-Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
     
     // Protected admin routes
     // Users Management
-    Route::resource('users', App\Http\Controllers\UserController::class)->names([
+    Route::resource('users', App\Http\Controllers\UserController::class)->except('show')->names([
         'index' => 'admin.users.index',
         'create' => 'admin.users.create',
         'store' => 'admin.users.store',
@@ -86,7 +91,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     });
     
     // Blog Management
-    Route::resource('blog-categories', App\Http\Controllers\Admin\BlogCategoryController::class)->names([
+    Route::resource('blog-categories', App\Http\Controllers\Admin\BlogCategoryController::class)->except('show')->names([
         'index' => 'admin.blog-categories.index',
         'create' => 'admin.blog-categories.create',
         'store' => 'admin.blog-categories.store',
@@ -107,7 +112,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     ]);
     
     // Team Members Management
-    Route::resource('team-members', App\Http\Controllers\Admin\TeamMemberController::class)->names([
+    Route::resource('team-members', App\Http\Controllers\Admin\TeamMemberController::class)->except('show')->names([
         'index' => 'admin.team-members.index',
         'create' => 'admin.team-members.create',
         'store' => 'admin.team-members.store',
@@ -118,7 +123,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     ]);
     
     // Testimonials Management
-    Route::resource('testimonials', App\Http\Controllers\Admin\TestimonialController::class)->names([
+    Route::resource('testimonials', App\Http\Controllers\Admin\TestimonialController::class)->except('show')->names([
         'index' => 'admin.testimonials.index',
         'create' => 'admin.testimonials.create',
         'store' => 'admin.testimonials.store',
@@ -129,7 +134,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     ]);
     
     // Service Pricing Management
-    Route::resource('service-pricing', App\Http\Controllers\Admin\ServicePricingController::class)->names([
+    Route::resource('service-pricing', App\Http\Controllers\Admin\ServicePricingController::class)->except('show')->names([
         'index' => 'admin.service-pricing.index',
         'create' => 'admin.service-pricing.create',
         'store' => 'admin.service-pricing.store',
@@ -150,7 +155,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     });
     
     // FAQ Management
-    Route::resource('faqs', App\Http\Controllers\Admin\FaqController::class)->names([
+    Route::resource('faqs', App\Http\Controllers\Admin\FaqController::class)->except('show')->names([
         'index' => 'admin.faqs.index',
         'create' => 'admin.faqs.create',
         'store' => 'admin.faqs.store',
@@ -160,7 +165,4 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         'destroy' => 'admin.faqs.destroy',
     ]);
     
-    // Catch-all route for admin
-    Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index']);
 });
-

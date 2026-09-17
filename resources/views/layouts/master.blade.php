@@ -6,7 +6,7 @@
     @include('layouts.head')
 </head>
 
-<body data-layout="horizontal" data-topbar="dark">
+<body class="nw-admin" data-bs-theme="dark" data-layout="horizontal" data-topbar="dark">
     
     <!-- Begin page -->
     <div id="layout-wrapper">

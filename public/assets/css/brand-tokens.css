@@ -1,0 +1,15 @@
+/* Shared NewWave palette, sampled from the logo. */
+:root {
+    --nw-primary: #f5ff00;
+    --nw-primary-hover: #faff70;
+    --nw-primary-rgb: 245, 255, 0;
+    --nw-red: #fe0002;
+    --nw-bg: #141618;
+    --nw-surface: #1d2023;
+    --nw-surface-raised: #25292d;
+    --nw-border: #41474d;
+    --nw-heading: #f5f6f7;
+    --nw-text: #c2c7cc;
+    --nw-muted: #a9b1b9;
+    --nw-on-primary: #141600;
+}

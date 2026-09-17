@@ -11,3 +11,4 @@
 <script src="{{ asset('assets/frontend/js/plugins/scrollIt.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/plugins/wow.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/custom.js') }}"></script>
+<script src="{{ asset('assets/js/image-wall.js') }}" defer></script>

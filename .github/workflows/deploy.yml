@@ -1,0 +1,110 @@
+name: CI/CD
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      APP_ENV: testing
+      APP_DEBUG: false
+      DB_CONNECTION: sqlite
+      DB_DATABASE: ':memory:'
+      CACHE_DRIVER: array
+      SESSION_DRIVER: array
+      MAIL_MAILER: array
+      GA4_MEASUREMENT_ID: ''
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, dom, curl, fileinfo, gd, zip, pdo_sqlite, pdo_mysql, intl
+          coverage: none
+          tools: composer:v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install locked dependencies
+        run: |
+          cp .env.example .env
+          composer validate --strict
+          composer install --no-interaction --prefer-dist
+          php artisan key:generate
+      - name: Dependency advisories and PHP syntax
+        run: |
+          composer audit --locked --no-dev
+          find app config database routes tests deploy -name '*.php' -print0 | xargs -0 -n1 php -l > /dev/null
+      - name: Application and consent tests
+        run: |
+          php vendor/bin/phpunit
+          node --test tests/js/*.test.cjs
+          node --check public/assets/js/analytics-consent.js
+          node --check public/assets/js/image-wall.js
+          node --check public/assets/frontend/js/custom.js
+      - name: Verify templates and routes
+        run: |
+          php artisan view:cache
+          php artisan route:cache
+          php artisan route:clear
+      - name: Validate deployment scripts
+        run: |
+          bash -n deploy/release.sh
+          bash -n deploy/rollback.sh
+          shellcheck deploy/release.sh deploy/rollback.sh
+
+  deploy:
+    needs: checks
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.PROD_DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    environment: production
+    concurrency:
+      group: newwave-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, dom, curl, fileinfo, gd, zip, pdo_mysql, intl
+          coverage: none
+          tools: composer:v2
+      - name: Build production release
+        env:
+          RELEASE_ID: ${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader --no-scripts
+          printf '%s\n' "$RELEASE_ID" > .release-id
+          tar --exclude=.git --exclude=.github --exclude='.env*' --exclude=node_modules \
+              --exclude=storage --exclude=tests --exclude=output --exclude=.playwright-cli \
+              --exclude='bootstrap/cache/*.php' --exclude=public/storage \
+              --exclude=public/assets/libs/tinymce \
+              -czf "$RUNNER_TEMP/release.tar.gz" .
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.PROD_SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.PROD_SSH_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+      - name: Upload and activate release
+        env:
+          PROD_SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
+          PROD_SSH_USER: ${{ secrets.PROD_SSH_USER }}
+          RELEASE_ID: ${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          scp -o BatchMode=yes "$RUNNER_TEMP/release.tar.gz" "$PROD_SSH_USER@$PROD_SSH_HOST:/var/www/newwave-deploy/incoming/$RELEASE_ID.tar.gz"
+          ssh -o BatchMode=yes "$PROD_SSH_USER@$PROD_SSH_HOST" "bash /var/www/newwave-deploy/bin/release.sh '$RELEASE_ID'"

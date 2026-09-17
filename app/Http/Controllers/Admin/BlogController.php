@@ -71,7 +71,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        return view('admin.blogs.show', compact('blog'));
+        return redirect()->route('admin.blogs.edit', $blog);
     }
 
     /**

@@ -15,18 +15,12 @@
         <div class="row justify-content-center">
             <div class="col-lg-10 col-md-12">
                 @if($faqs->count() > 0)
-                <ul class="accordion-box clearfix">
-                    @foreach($faqs as $index => $faq)
-                    <li class="accordion block">
-                        <div class="acc-btn"><span class="count">{{ $index + 1 }}.</span> {{ $faq->question }}</div>
-                        <div class="acc-content">
-                            <div class="content">
-                                <div class="text">{!! nl2br(e($faq->answer)) !!}</div>
-                            </div>
-                        </div>
-                    </li>
-                    @endforeach
-                </ul>
+                @foreach($faqs as $faq)
+                <details class="faq-item">
+                    <summary>{{ $faq->question }}</summary>
+                    <p>{!! nl2br(e($faq->answer)) !!}</p>
+                </details>
+                @endforeach
                 @else
                 <div class="text-center">
                     <p>No FAQs available at the moment.</p>
@@ -37,51 +31,8 @@
     </div>
 </section>
 
-<!-- Testimonials -->
-@if($testimonials->count() > 0)
-<section id="testimonials" class="testimonials">
-    <div class="background bg-img bg-imgfixed section-padding" data-overlay-dark="5" data-background="{{ asset('assets/frontend/images/car_pics/sunset_duo.jpg') }}">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Work together -->
-                <div class="col-md-5 mb-30">
-                    <h4 class="wow" data-splitting>Let's capture the perfect shots together.</h4>
-                    @if($globalContactSettings && $globalContactSettings->email)
-                    <div class="btn-wrap mt-30 text-left wow fadeInUp" data-wow-delay=".6s">
-                        <div class="btn-link"><a href="mailto:{{ $globalContactSettings->email }}">{{ $globalContactSettings->email }}</a><span class="btn-block color3 animation-bounce"></span></div>
-                    </div>
-                    @endif
-                </div>
-                <!-- Testimonials -->
-                <div class="col-md-5 offset-md-2">
-                    <div class="testimonials-box">
-                        <h5>What Are Clients Saying?</h5>
-                        <div class="owl-carousel owl-theme">
-                            @foreach($testimonials as $testimonial)
-                            <div class="item">
-                                <p>{{ $testimonial->content }}</p>
-                                <span class="quote"><img src="{{ asset('assets/frontend/images/quot.png') }}" alt="" loading="lazy"></span>
-                                <div class="info">
-                                    @if($testimonial->image)
-                                    <div class="author-img">
-                                        <img src="{{ asset('storage/' . $testimonial->image) }}" alt="{{ $testimonial->name }}" loading="lazy">
-                                    </div>
-                                    @endif
-                                    <div class="cont">
-                                        <h6>{{ $testimonial->name }}</h6>
-                                        <span>{{ $testimonial->position ?? 'Customer' }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-@endif
+@include('frontend.partials.testimonials')
+
 
 <!-- Scrolling -->
 <div class="scrolling scrolling-ticker">

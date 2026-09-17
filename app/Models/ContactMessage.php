@@ -16,10 +16,13 @@ class ContactMessage extends Model
         'subject',
         'message',
         'is_read',
+        'consented_at',
+        'privacy_policy_version',
     ];
 
     protected $casts = [
         'is_read' => 'boolean',
+        'consented_at' => 'datetime',
     ];
 
     /**

@@ -25,16 +25,21 @@ class ContactController extends Controller
      */
     public function submit(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:20',
+            'phone' => 'nullable|string|max:20',
             'subject' => 'required|string|max:255',
-            'message' => 'required|string',
+            'message' => 'required|string|max:10000',
+            'privacy_consent' => 'accepted',
         ]);
 
         // Save the message to the database
-        $contactMessage = ContactMessage::create($request->all());
+        unset($validated['privacy_consent']);
+        $validated['phone'] = $validated['phone'] ?? '';
+        $validated['consented_at'] = now();
+        $validated['privacy_policy_version'] = config('site.policy_version');
+        ContactMessage::create($validated);
 
         // Get admin email from settings
         $contactSettings = ContactSetting::first();
@@ -55,7 +60,7 @@ class ContactController extends Controller
                         ->replyTo($request->email, $request->name);
                 });
             } catch (\Exception $e) {
-                \Log::error('Contact email failed: ' . $e->getMessage());
+                \Log::error('Contact notification delivery failed. Review mail service configuration.');
             }
         }
 

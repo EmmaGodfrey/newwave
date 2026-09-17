@@ -6,7 +6,8 @@
     @include('frontend.layouts.css')
 </head>
 
-<body>
+<body class="nw-site">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     {{-- Preloader --}}
     @include('frontend.partials.preloader')
     
@@ -20,12 +21,13 @@
     @include('frontend.partials.navbar')
     
     {{-- Main Content --}}
-    <main>
+    <main id="main-content" tabindex="-1">
         @yield('content')
     </main>
     
     {{-- Footer --}}
     @include('frontend.partials.footer')
+    @include('frontend.partials.analytics')
     
     {{-- JavaScript files --}}
     @include('frontend.layouts.js')

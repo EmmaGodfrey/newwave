@@ -175,14 +175,14 @@
             </div>
             <div class="card-body">
                 @if($event->images->count() > 0)
-                    <div class="row g-2">
+                    <div class="image-wall" data-image-wall>
                         @foreach($event->images as $image)
-                            <div class="col-6">
+                            <div class="image-tile">
                                 <div class="position-relative">
                                     <img src="{{ asset('storage/' . $image->image_path) }}" 
                                          alt="{{ $image->title }}" 
                                          class="img-fluid rounded" 
-                                         style="height: 100px; object-fit: cover; width: 100%;">
+                                         >
                                     <div class="position-absolute top-0 end-0 p-1">
                                         <button type="button" class="btn btn-danger btn-sm" 
                                                 onclick="deleteImage({{ $image->id }})" 
@@ -282,6 +282,7 @@ function deleteImage(imageId) {
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
         })
         .then(response => response.json())

@@ -12,12 +12,17 @@ class BlogController extends Controller
     /**
      * Display a listing of published blogs.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->validate(['month' => 'nullable|date_format:Y-m']);
+
         $blogs = Blog::with('category')
             ->published()
+            ->when($request->filled('month'), fn ($query) => $query
+                ->whereYear('published_at', substr($request->month, 0, 4))
+                ->whereMonth('published_at', substr($request->month, 5, 2)))
             ->orderBy('published_at', 'desc')
-            ->paginate(10);
+            ->paginate(10)->withQueryString();
 
         // Get recent posts for sidebar
         $recentPosts = Blog::with('category')
@@ -34,12 +39,7 @@ class BlogController extends Controller
             ->get();
 
         // Get archives (months with published posts)
-        $archives = Blog::published()
-            ->selectRaw('DATE_FORMAT(published_at, "%Y-%m") as month, DATE_FORMAT(published_at, "%M %Y") as formatted_month, COUNT(*) as count')
-            ->groupBy('month', 'formatted_month')
-            ->orderBy('month', 'desc')
-            ->take(6)
-            ->get();
+        $archives = $this->archives();
 
         $testimonials = Testimonial::active()->ordered()->take(2)->get();
 
@@ -93,7 +93,7 @@ class BlogController extends Controller
             ->published()
             ->where('blog_category_id', $selectedCategory->id)
             ->orderBy('published_at', 'desc')
-            ->paginate(10);
+            ->paginate(10)->withQueryString();
 
         // Get recent posts for sidebar
         $recentPosts = Blog::with('category')
@@ -110,14 +110,11 @@ class BlogController extends Controller
             ->get();
 
         // Get archives
-        $archives = Blog::published()
-            ->selectRaw('DATE_FORMAT(published_at, "%Y-%m") as month, DATE_FORMAT(published_at, "%M %Y") as formatted_month, COUNT(*) as count')
-            ->groupBy('month', 'formatted_month')
-            ->orderBy('month', 'desc')
-            ->take(6)
-            ->get();
+        $archives = $this->archives();
 
-        return view('frontend.pages.blog', compact('blogs', 'recentPosts', 'categories', 'archives', 'selectedCategory'));
+        $testimonials = Testimonial::active()->ordered()->take(2)->get();
+
+        return view('frontend.pages.blog', compact('blogs', 'recentPosts', 'categories', 'archives', 'selectedCategory', 'testimonials'));
     }
 
     /**
@@ -125,7 +122,8 @@ class BlogController extends Controller
      */
     public function search(Request $request)
     {
-        $searchTerm = $request->input('search');
+        $request->validate(['search' => 'nullable|string|max:255']);
+        $searchTerm = $request->input('search', '');
 
         $blogs = Blog::with('category')
             ->published()
@@ -135,7 +133,7 @@ class BlogController extends Controller
                     ->orWhere('excerpt', 'like', '%' . $searchTerm . '%');
             })
             ->orderBy('published_at', 'desc')
-            ->paginate(10);
+            ->paginate(10)->withQueryString();
 
         // Get recent posts for sidebar
         $recentPosts = Blog::with('category')
@@ -152,13 +150,22 @@ class BlogController extends Controller
             ->get();
 
         // Get archives
-        $archives = Blog::published()
-            ->selectRaw('DATE_FORMAT(published_at, "%Y-%m") as month, DATE_FORMAT(published_at, "%M %Y") as formatted_month, COUNT(*) as count')
-            ->groupBy('month', 'formatted_month')
-            ->orderBy('month', 'desc')
-            ->take(6)
-            ->get();
+        $archives = $this->archives();
 
-        return view('frontend.pages.blog', compact('blogs', 'recentPosts', 'categories', 'archives', 'searchTerm'));
+        $testimonials = Testimonial::active()->ordered()->take(2)->get();
+
+        return view('frontend.pages.blog', compact('blogs', 'recentPosts', 'categories', 'archives', 'searchTerm', 'testimonials'));
+    }
+    private function archives()
+    {
+        // Group dates in PHP so both the production database and SQLite tests work.
+        return Blog::published()->orderByDesc('published_at')->get(['published_at'])
+            ->groupBy(fn ($post) => $post->published_at->format('Y-m'))
+            ->take(6)
+            ->map(fn ($posts, $month) => (object) [
+                'month' => $month,
+                'formatted_month' => $posts->first()->published_at->format('F Y'),
+                'count' => $posts->count(),
+            ])->values();
     }
 }

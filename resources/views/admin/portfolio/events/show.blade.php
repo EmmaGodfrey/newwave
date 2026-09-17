@@ -18,8 +18,8 @@
 
 .image-card img {
     width: 100%;
-    height: 250px;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
 }
 
 .image-actions {
@@ -124,7 +124,7 @@
                         </button>
                     </div>
 
-                    <div id="previewArea" class="mt-3 row" style="display: none;"></div>
+                    <div id="previewArea" class="mt-3 image-wall" data-image-wall style="display: none;"></div>
 
                     <div class="mt-3" id="uploadControls" style="display: none;">
                         <div class="mb-3">
@@ -160,9 +160,9 @@
                 @endif
 
                 @if($event->images->count() > 0)
-                    <div class="row">
+                    <div class="image-wall" data-image-wall>
                         @foreach($event->images as $image)
-                            <div class="col-lg-3 col-md-4 col-sm-6 mb-4" id="image-{{ $image->id }}">
+                            <div class="image-tile" id="image-{{ $image->id }}">
                                 <div class="card image-card">
                                     @if($image->is_featured)
                                         <span class="badge bg-warning image-badge">Featured</span>
@@ -276,7 +276,7 @@ function handleFiles(files) {
     if (files.length === 0) return;
 
     previewArea.innerHTML = '';
-    previewArea.style.display = 'flex';
+    previewArea.style.display = '';
     uploadControls.style.display = 'block';
 
     for (let i = 0; i < files.length; i++) {
@@ -286,15 +286,18 @@ function handleFiles(files) {
         const reader = new FileReader();
         reader.onload = (e) => {
             const col = document.createElement('div');
-            col.className = 'col-lg-2 col-md-3 col-sm-4 col-6 mb-3';
-            col.innerHTML = `
-                <div class="card">
-                    <img src="${e.target.result}" class="card-img-top" style="height: 150px; object-fit: cover;" alt="${file.name}">
-                    <div class="card-body p-2">
-                        <small class="text-muted">${file.name}</small>
-                    </div>
-                </div>
-            `;
+            col.className = 'image-tile';
+            const card = document.createElement('div');
+            card.className = 'card';
+            const image = document.createElement('img');
+            image.src = e.target.result;
+            image.alt = file.name;
+            image.className = 'card-img-top';
+            const caption = document.createElement('div');
+            caption.className = 'card-body p-2 small';
+            caption.textContent = file.name;
+            card.append(image, caption);
+            col.appendChild(card);
             previewArea.appendChild(col);
         };
         reader.readAsDataURL(file);

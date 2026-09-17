@@ -37,6 +37,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'is_admin' => 'required|boolean',
         ]);
 
         if ($validator->fails()) {
@@ -46,11 +47,13 @@ class UserController extends Controller
             ], 422);
         }
 
-        User::create([
+        $user = new User([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        $user->is_admin = $request->boolean('is_admin');
+        $user->save();
 
         return response()->json([
             'success' => true,
@@ -77,6 +80,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8|confirmed',
+            'is_admin' => 'required|boolean',
         ]);
 
         if ($validator->fails()) {
@@ -93,9 +97,18 @@ class UserController extends Controller
 
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
+            $data['remember_token'] = \Illuminate\Support\Str::random(60);
         }
 
-        $user->update($data);
+        if ($user->is($request->user()) && ! $request->boolean('is_admin')) {
+            return response()->json(['message' => 'You cannot remove your own admin access.', 'errors' => ['is_admin' => ['You cannot remove your own admin access.']]], 422);
+        }
+
+        $user->fill($data);
+        if (isset($data['remember_token'])) $user->remember_token = $data['remember_token'];
+        if ($user->isDirty('email')) $user->email_verified_at = null;
+        $user->is_admin = $request->boolean('is_admin');
+        $user->save();
 
         return response()->json([
             'success' => true,
@@ -108,6 +121,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if ($user->is(auth()->user())) {
+            return response()->json(['message' => 'You cannot delete your own account.'], 422);
+        }
+
         $user->delete();
 
         return response()->json([

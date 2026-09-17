@@ -185,7 +185,7 @@
             , loop: true
             , dots: true
             , margin: 0
-            , autoplay: true
+            , autoplay: false
             , autoplayTimeout: 5000
             , animateOut: 'fadeOut'
             , nav: false
@@ -613,7 +613,8 @@
     /*----------------------------------------------------
       26. Contact Form
     ----------------------------------------------------*/
-    var form = $('.contact__form')
+    // The Laravel contact page owns its submit handler and validation messages.
+    var form = $('.contact__form').not('#contactForm')
         , message = $('.contact__msg')
         , form_data;
     // success function

@@ -1,0 +1,26 @@
+asset,used_in,rights_status,evidence_needed
+assets/frontend/images/asterisk-icon.svg,resources/views/frontend/partials/scrolling.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/canvas-1.png,resources/views/frontend/pages/home.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/canvas-2.png,resources/views/frontend/pages/home.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/car_pics/car-meet-01.jpg,resources/views/frontend/pages/home.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/car_pics/car-show-01.jpg,resources/views/frontend/pages/home.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/car_pics/drift-action-01.jpg,resources/views/frontend/pages/home.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/car_pics/drift-competition-01.jpg,resources/views/frontend/pages/home.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/car_pics/event-coverage-01.jpg,resources/views/frontend/pages/home.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/car_pics/motorsport-event-01.jpg,resources/views/frontend/partials/testimonials.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/car_pics/spinning-action-01.jpg,resources/views/frontend/pages/about.blade.php; resources/views/frontend/pages/home.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/car_pics/spinning-event-01.jpg,resources/views/frontend/pages/home.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/car_pics/sunset-duo-cars.jpg,resources/views/frontend/pages/home.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/car_pics/sunset_duo.jpg,resources/views/frontend/pages/home.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/car_pics/track-action-01.jpg,resources/views/frontend/pages/blog.blade.php; resources/views/frontend/pages/home.blade.php; resources/views/frontend/partials/event-tile.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/favicon.ico,resources/views/frontend/layouts/css.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/icons/icon-,resources/views/frontend/pages/home.blade.php; resources/views/frontend/pages/services.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/icons/icon-1.svg,resources/views/frontend/pages/faq.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/icons/icon-2.svg,resources/views/frontend/pages/faq.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/icons/icon-3.svg,resources/views/frontend/pages/faq.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/icons/icon-4.svg,resources/views/frontend/pages/faq.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/icons/icon-5.svg,resources/views/frontend/pages/faq.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/newwavelogo.png,resources/views/frontend/partials/footer.blade.php; resources/views/frontend/partials/navbar.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/quot.png,resources/views/frontend/pages/testimonials.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/slider/01.jpg,resources/views/frontend/pages/blog-detail.blade.php,Unverified,Owner/licence and any required subject or event publication permission
+assets/frontend/images/slider/02.jpg,resources/views/frontend/pages/blog-detail.blade.php,Unverified,Owner/licence and any required subject or event publication permission

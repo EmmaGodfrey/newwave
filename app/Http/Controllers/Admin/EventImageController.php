@@ -72,12 +72,12 @@ class EventImageController extends Controller
     public function show(EventImage $image)
     {
         $image->load('event.category');
-        return view('admin.portfolio.images.show', compact('image'));
+        return redirect()->route('admin.portfolio.images.edit', $image);
     }
 
     public function edit(EventImage $image)
     {
-        $events = PortfolioEvent::where('is_active', true)
+        $events = PortfolioEvent::query()
             ->with('category')
             ->orderBy('created_at', 'desc')
             ->get();
@@ -86,7 +86,7 @@ class EventImageController extends Controller
 
     public function update(Request $request, EventImage $image)
     {
-        $request->validate([
+        $validated = $request->validate([
             'event_id' => 'required|exists:portfolio_events,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'title' => 'nullable|string|max:255',
@@ -95,18 +95,19 @@ class EventImageController extends Controller
             'is_featured' => 'boolean'
         ]);
 
-        $data = $request->all();
+        $data = collect($validated)->except('image')->all();
         $data['is_featured'] = $request->input('is_featured', 0) == 1;
 
+        $previousPath = $image->image_path;
         if ($request->hasFile('image')) {
-            // Delete old image
-            Storage::disk('public')->delete($image->image_path);
-            
             $data['image_path'] = $request->file('image')
                 ->store('portfolio/images', 'public');
         }
 
         $image->update($data);
+        if (isset($data['image_path']) && $previousPath !== $data['image_path']) {
+            Storage::disk('public')->delete($previousPath);
+        }
 
         return redirect()->route('admin.portfolio.images.index')
             ->with('success', 'Image updated successfully.');
