@@ -35,7 +35,7 @@ class ServicePricingDataTable extends DataTable
                 return implode(' ', $badges);
             })
             ->editColumn('price', function ($service) {
-                return '$' . number_format($service->price, 2);
+                return 'ZMW ' . number_format($service->price, 2);
             })
             ->editColumn('description', function ($service) {
                 return '<div style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="' . htmlspecialchars($service->description ?? '') . '">' . htmlspecialchars($service->description ?? '-') . '</div>';

@@ -112,7 +112,7 @@
                                 <a href="{{ route('admin.testimonials.index') }}" class="dropdown-item"><i
                                         class="uil-chat-bubble-user me-2"></i>Testimonials</a>
                                 <a href="{{ route('admin.service-pricing.index') }}" class="dropdown-item"><i
-                                        class="uil-dollar-alt me-2"></i>Service Pricing</a>
+                                        class="uil-tag-alt me-2"></i>Service Pricing</a>
                             </div>
                         </li>
 
