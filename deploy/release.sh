@@ -38,6 +38,7 @@ chgrp -R www-data "$release"
 chmod -R g+rX "$release"
 chmod 2770 "$release/bootstrap/cache"
 cd "$release"
+php8.3 /usr/local/bin/composer check-platform-reqs --no-dev
 php8.3 artisan package:discover --no-ansi
 php8.3 deploy/preflight.php
 backup="$base/backups/$release_id"
